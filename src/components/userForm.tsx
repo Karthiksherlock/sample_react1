@@ -43,15 +43,15 @@ function UserForm() {
 
     if (name === "email") {
       if (!/^[a-zA-Z0-9]{3,}@gmail\.com$/.test(value)) {
-        setErrors({
-          ...errors,
+        setErrors((prev) => ({
+          ...prev,
           email: "Email must be like abc123@gmail.com",
-        });
+        }));
       } else {
-        setErrors({
-          ...errors,
+        setErrors((prev) => ({
+          ...prev,
           email: "",
-        });
+        }));
       }
     }
   };
@@ -167,16 +167,16 @@ function UserForm() {
                 phone: true,
               });
 
-              if (value.length < 10) {
-                setErrors({
-                  ...errors,
-                  phone: "Phone must be 10 digits",
-                });
+              if (!/^[6-9][0-9]{9}$/.test(value)) {
+                setErrors((prev) => ({
+                  ...prev,
+                  phone: "Phone must be 10 digits and start with 6-9",
+                }));
               } else {
-                setErrors({
-                  ...errors,
+                setErrors((prev) => ({
+                  ...prev,
                   phone: "",
-                });
+                }));
               }
             }}
           />
