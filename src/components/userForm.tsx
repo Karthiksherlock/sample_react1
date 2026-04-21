@@ -41,6 +41,7 @@ function UserForm() {
       [name]: true,
     });
 
+    // Email validation (gmail only)
     if (name === "email") {
       if (!/^[a-zA-Z0-9]{3,}@gmail\.com$/.test(value)) {
         setErrors((prev) => ({
@@ -96,6 +97,7 @@ function UserForm() {
             value={form.firstName}
             maxLength={30}
             onChange={handleChange}
+            required
           />
           {touched.firstName && !form.firstName && (
             <p className="error">First name required</p>
@@ -109,6 +111,7 @@ function UserForm() {
             value={form.lastName}
             maxLength={30}
             onChange={handleChange}
+            required
           />
           {touched.lastName && !form.lastName && (
             <p className="error">Last name required</p>
@@ -121,6 +124,7 @@ function UserForm() {
             name="gender"
             value={form.gender}
             onChange={handleChange}
+            required
           >
             <option value="">Select Gender</option>
             <option value="Male">Male</option>
@@ -137,10 +141,12 @@ function UserForm() {
         <div className="field">
           <label>Email</label>
           <input
+            type="email"
             name="email"
             value={form.email}
             maxLength={50}
             onChange={handleChange}
+            required
           />
           {touched.email && !form.email && (
             <p className="error">Email required</p>
@@ -151,9 +157,11 @@ function UserForm() {
         <div className="field">
           <label>Phone</label>
           <input
+            type="tel"
             name="phone"
             value={form.phone}
             maxLength={10}
+            pattern="[6-9]{1}[0-9]{9}"
             onChange={(e) => {
               const value = e.target.value.replace(/[^0-9]/g, "");
 
@@ -179,6 +187,7 @@ function UserForm() {
                 }));
               }
             }}
+            required
           />
           {touched.phone && !form.phone && (
             <p className="error">Phone required</p>
