@@ -1,23 +1,20 @@
-type HeaderProps = {
+type Props = {
   onAddLanguage: () => void;
+  onExport: () => void;
+  onSave: () => void;
 };
 
-function Header({ onAddLanguage }: HeaderProps) {
+function Header({ onAddLanguage, onExport, onSave }: Props) {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "20px",
-      }}
-    >
+    <div className="header">
       <h2>Language Editor</h2>
 
-      <div style={{ display: "flex", gap: "10px" }}>
-        <button>Export JSON</button>
-        <button>Save Changes</button>
-        <button onClick={onAddLanguage}>+ Add Language</button>
+      <div className="actions">
+        <button onClick={onExport}>Export JSON</button>
+        <button onClick={onSave}>Save changes</button>
+        <button className="primary" onClick={onAddLanguage}>
+          + Add Language
+        </button>
       </div>
     </div>
   );

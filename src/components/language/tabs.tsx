@@ -1,33 +1,20 @@
-type Language = {
-  code: string;
-  name: string;
-};
-
-type TabsProps = {
-  languages: Language[];
+type Props = {
+  languages: any[];
   selectedLanguage: string;
-  onSelect: (code: string) => void;
+  onSelect: (name: string) => void;
 };
 
-function Tabs({ languages, selectedLanguage, onSelect }: TabsProps) {
+function Tabs({ languages, selectedLanguage, onSelect }: Props) {
   return (
-    <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+    <div className="tabs">
       {languages.map((lang) => (
-        <button
-          key={lang.code}
-          onClick={() => onSelect(lang.code)}
-          style={{
-            padding: "8px 16px",
-            background:
-              selectedLanguage === lang.code ? "#ff6b00" : "#eee",
-            color: selectedLanguage === lang.code ? "#fff" : "#000",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
+        <div
+          key={lang.name}
+          className={`tab ${selectedLanguage === lang.name ? "active" : ""}`}
+          onClick={() => onSelect(lang.name)}
         >
           {lang.name}
-        </button>
+        </div>
       ))}
     </div>
   );

@@ -1,0 +1,100 @@
+.page {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.primary {
+  background: orange;
+  color: white;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.tab {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.active {
+  background: orange;
+  color: white;
+}
+
+.details {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.details-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.micro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.micro-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.badge {
+  margin-left: 10px;
+  font-size: 12px;
+  background: #eee;
+  padding: 2px 6px;
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  width: 300px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}

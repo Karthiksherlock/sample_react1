@@ -1,31 +1,27 @@
-type Item = {
-  key: string;
-  value: string;
-};
-
 type Props = {
-  item: Item;
-  index: number;
-  onChange: (index: number, field: "key" | "value", value: string) => void;
-  onDelete: (index: number) => void;
+  item: { key: string; value: string };
+  onChange: (oldKey: string, newKey: string, newValue: string) => void;
+  onDelete: (key: string) => void;
 };
 
-function MicroCopyItem({ item, index, onChange, onDelete }: Props) {
+function MicroCopyItem({ item, onChange, onDelete }: Props) {
   return (
-    <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+    <div className="item">
       <input
-        placeholder="Key"
         value={item.key}
-        onChange={(e) => onChange(index, "key", e.target.value)}
+        onChange={(e) =>
+          onChange(item.key, e.target.value, item.value)
+        }
       />
 
       <textarea
-        placeholder="Value"
         value={item.value}
-        onChange={(e) => onChange(index, "value", e.target.value)}
+        onChange={(e) =>
+          onChange(item.key, item.key, e.target.value)
+        }
       />
 
-      <button onClick={() => onDelete(index)}>Delete</button>
+      <button onClick={() => onDelete(item.key)}>🗑</button>
     </div>
   );
 }
