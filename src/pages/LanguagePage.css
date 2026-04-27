@@ -1,90 +1,48 @@
-.page {
+.language-page {
+  padding: 20px;
   max-width: 900px;
   margin: auto;
-  padding: 20px;
 }
 
-.header {
+.controls {
   display: flex;
   justify-content: space-between;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-}
-
-.primary {
-  background: orange;
-  color: white;
-}
-
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.tab {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-}
-
-.active {
-  background: orange;
-  color: white;
-}
-
-.details {
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-
-.details-header {
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-}
-
-.details-box {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.micro-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.micro-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.badge {
-  margin-left: 10px;
-  font-size: 12px;
-  background: #eee;
-  padding: 2px 6px;
-}
-
-.item {
-  display: flex;
-  gap: 10px;
   margin: 10px 0;
+}
+
+.search-input {
+  padding: 8px;
+  width: 250px;
+}
+
+.add-btn {
+  background: orange;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+}
+
+.micro-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.micro-item input {
+  width: 200px;
+}
+
+.micro-item textarea {
+  width: 300px;
 }
 
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .modal-box {
@@ -97,4 +55,13 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+}
+
+.btn {
+  background: orange;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
 }

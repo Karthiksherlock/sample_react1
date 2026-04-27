@@ -1,116 +1,116 @@
-import { useState } from "react";
-import Header from "../components/language/header";
-import Tabs from "../components/language/tabs";
+import { useEffect, useState } from "react";
+import Header from "../components/language/Header";
+import Tabs from "../components/language/Tabs";
 import MicroCopyItem from "../components/language/MicroCopyItem";
 import AddLanguageModal from "../components/language/AddLanguageModal";
+import Button from "../components/Common/Button";
 import "./LanguagePage.css";
 
-type LanguageConfig = {
+type Language = {
   name: string;
   iana_code: string;
   iso_code: string;
   font_family: string;
   font_url: string;
-  micro_copies: Record<string, string>;
 };
 
-type LanguageRecord = Record<string, LanguageConfig>;
+type LanguageMap = Record<string, Language>;
+type MicroCopyMap = Record<string, Record<string, string>>;
 
 function LanguagePage() {
-  const [languages, setLanguages] = useState<LanguageRecord>({
-    English: {
-      name: "English",
-      iana_code: "en",
-      iso_code: "en",
-      font_family: "Noto Sans",
-      font_url: "https://fonts.googleapis.com/css?family=Noto+Sans",
-      micro_copies: {
-        WelcomeText: "Welcome",
-        GeneralContinue: "Continue",
-      },
-    },
-  });
-
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
-  const [showModal, setShowModal] = useState(false);
+  const [languages, setLanguages] = useState<LanguageMap>({});
+  const [microCopies, setMicroCopies] = useState<MicroCopyMap>({});
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [search, setSearch] = useState("");
-  const [showDetails, setShowDetails] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
-  const currentLanguage = languages[selectedLanguage];
+  useEffect(() => {
+    loadData();
+  }, []);
 
-  const handleMicroCopyChange = (
-    oldKey: string,
-    newKey: string,
-    newValue: string
-  ) => {
-    setLanguages((prev) => {
-      const language = prev[selectedLanguage];
-      const updated = { ...language.micro_copies };
+  const loadData = () => {
+    const mockLanguages: LanguageMap = {
+      English: {
+        name: "English",
+        iana_code: "en",
+        iso_code: "en",
+        font_family: "Noto Sans",
+        font_url: "",
+      },
+      Tamil: {
+        name: "Tamil",
+        iana_code: "ta",
+        iso_code: "ta",
+        font_family: "Noto Sans Tamil",
+        font_url: "",
+      },
+    };
 
-      if (oldKey !== newKey) delete updated[oldKey];
-      updated[newKey] = newValue;
+    const mockKeys: MicroCopyMap = {
+      WelcomeText: { English: "Welcome", Tamil: "வணக்கம்" },
+      Continue: { English: "Continue", Tamil: "தொடரவும்" },
+    };
 
-      return {
-        ...prev,
-        [selectedLanguage]: {
-          ...language,
-          micro_copies: updated,
-        },
-      };
+    setLanguages(mockLanguages);
+    setMicroCopies(mockKeys);
+    setSelectedLanguage("English");
+  };
+
+  const handleAddKey = () => {
+    const key = prompt("Enter key");
+    if (!key) return;
+
+    setMicroCopies((prev) => {
+      const updated: MicroCopyMap = { ...prev };
+
+      updated[key] = {};
+      Object.keys(languages).forEach((lang) => {
+        updated[key][lang] = "";
+      });
+
+      return updated;
     });
   };
 
-  const handleAdd = () => {
-    const tempKey = "key_" + Date.now();
-
-    setLanguages((prev) => {
-      const language = prev[selectedLanguage];
-
-      return {
-        ...prev,
-        [selectedLanguage]: {
-          ...language,
-          micro_copies: {
-            ...language.micro_copies,
-            [tempKey]: "",
-          },
-        },
-      };
-    });
+  const handleValueChange = (key: string, value: string) => {
+    setMicroCopies((prev) => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        [selectedLanguage]: value,
+      },
+    }));
   };
 
   const handleDelete = (key: string) => {
-    setLanguages((prev) => {
-      const language = prev[selectedLanguage];
-      const updated = { ...language.micro_copies };
-      delete updated[key];
-
-      return {
-        ...prev,
-        [selectedLanguage]: {
-          ...language,
-          micro_copies: updated,
-        },
-      };
-    });
+    const updated = { ...microCopies };
+    delete updated[key];
+    setMicroCopies(updated);
   };
 
-  const handleAddLanguage = (lang: Omit<LanguageConfig, "micro_copies">) => {
+  const handleAddLanguage = (lang: Language) => {
     setLanguages((prev) => ({
       ...prev,
-      [lang.name]: {
-        ...lang,
-        micro_copies: {},
-      },
+      [lang.name]: lang,
     }));
+
+    setMicroCopies((prev) => {
+      const updated = { ...prev };
+      Object.keys(updated).forEach((key) => {
+        updated[key][lang.name] = "";
+      });
+      return updated;
+    });
 
     setSelectedLanguage(lang.name);
   };
 
   const handleExport = () => {
-    const blob = new Blob([JSON.stringify(languages, null, 2)], {
-      type: "application/json",
-    });
+    const blob = new Blob(
+      [JSON.stringify({ languages, microCopies }, null, 2)],
+      { type: "application/json" }
+    );
 
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -120,9 +120,13 @@ function LanguagePage() {
   };
 
   const handleSave = () => {
-    localStorage.setItem("languages", JSON.stringify(languages));
-    alert("Saved locally");
+    alert("Mock API Save");
   };
+
+  const currentLanguage =
+    languages[selectedLanguage] || Object.values(languages)[0];
+
+  if (!currentLanguage) return null;
 
   return (
     <div className="page">
@@ -133,18 +137,27 @@ function LanguagePage() {
       />
 
       <Tabs
-        languages={Object.values(languages).map((lang) => ({
-          code: lang.name,
-          name: lang.name,
-        }))}
+        languages={Object.values(languages)}
         selectedLanguage={selectedLanguage}
         onSelect={setSelectedLanguage}
       />
 
+      <div className="top-bar">
+        <Button onClick={handleAddKey}>+ Add Key</Button>
+
+        <input
+          placeholder="Search keys..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
       <div className="details">
-        <div className="details-header" onClick={() => setShowDetails(!showDetails)}>
-          <h3>Language details</h3>
-          <span>{showDetails ? "▲" : "▼"}</span>
+        <div
+          className="details-toggle"
+          onClick={() => setShowDetails(!showDetails)}
+        >
+          Language Details {showDetails ? "▲" : "▼"}
         </div>
 
         {showDetails && (
@@ -158,44 +171,31 @@ function LanguagePage() {
         )}
       </div>
 
-      <div className="micro-header">
-        <h3>
-          Micro-copies
-          <span className="badge">
-            {Object.keys(currentLanguage.micro_copies).length} keys
-          </span>
-        </h3>
-
-        <div className="micro-actions">
-          <input
-            placeholder="Search keys..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-
-          <button onClick={handleAdd}>+ Add micro-copy</button>
-        </div>
-      </div>
-
       <div className="list">
-        {Object.entries(currentLanguage.micro_copies)
+        {Object.entries(microCopies)
           .filter(([key]) =>
             key.toLowerCase().includes(search.toLowerCase())
           )
-          .map(([key, value]) => (
-            <MicroCopyItem
-              key={key}
-              item={{ key, value }}
-              onChange={handleMicroCopyChange}
-              onDelete={handleDelete}
-            />
-          ))}
+          .map(([key, langValues]) => {
+            const values = langValues as Record<string, string>;
+
+            return (
+              <MicroCopyItem
+                key={key}
+                label={key}
+                value={values[selectedLanguage] || ""}
+                onChange={(val: string) => handleValueChange(key, val)}
+                onDelete={() => handleDelete(key)}
+              />
+            );
+          })}
       </div>
 
       {showModal && (
         <AddLanguageModal
+          open={showModal}
           onClose={() => setShowModal(false)}
-          onAdd={handleAddLanguage}
+          onCreate={handleAddLanguage}
         />
       )}
     </div>
