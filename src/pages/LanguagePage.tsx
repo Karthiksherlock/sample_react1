@@ -326,9 +326,9 @@ export default function LanguagePage() {
               filteredKeys.map((key) => (
                 <MicroCopyItem
                   key={key}
-                  label={key}
+                  keyName={key}
                   value={activeLang.values[key] ?? ""}
-                  onChange={(v: string) => setValue(activeLang.iana, key, v)}
+                  onValueChange={(v) => setValue(activeLang.iana, key, v)}
                   onDelete={() => deleteKeyGlobally(key)}
                 />
               ))
