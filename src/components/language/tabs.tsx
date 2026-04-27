@@ -1,13 +1,5 @@
 import { Globe } from "lucide-react";
 
-type Language = {
-  name: string;
-  iana_code: string;
-  iso_code: string;
-  font_family: string;
-  font_url: string;
-};
-
 export interface TabItem {
   iana: string;
   name: string;
@@ -15,27 +7,27 @@ export interface TabItem {
 }
 
 interface TabsProps {
-  languages: Language[];
-  selectedLanguage: string;
-  onSelect: (name: string) => void;
+  tabs: TabItem[];
+  activeIana: string;
+  onChange: (iana: string) => void;
 }
 
-export default function Tabs({ languages, selectedLanguage, onSelect }: TabsProps) {
+export default function Tabs({ tabs, activeIana, onChange }: TabsProps) {
   return (
     <div className="lp-tabs" role="tablist">
-      {languages.map((lang) => {
-        const active = lang.name === selectedLanguage;
+      {tabs.map((t) => {
+        const active = t.iana === activeIana;
         return (
           <button
-            key={lang.iana_code}
+            key={t.iana}
             role="tab"
             aria-selected={active}
             className={`lp-tab ${active ? "lp-tab--active" : ""}`}
-            onClick={() => onSelect(lang.name)}
+            onClick={() => onChange(t.iana)}
           >
             <Globe size={16} />
-            <span>{lang.name}</span>
-            <span className="lp-tab__badge">0</span>
+            <span>{t.name}</span>
+            <span className="lp-tab__badge">{t.count}</span>
           </button>
         );
       })}
