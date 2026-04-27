@@ -1,0 +1,29 @@
+{
+  "languages": [
+    {
+      "name": "English",
+      "iana": "en",
+      "iso": "en",
+      "fontFamily": "Inter",
+      "fontUrl": "https://fonts.googleapis.com/css2?family=Inter&display=swap",
+      "values": {
+        "WelcomeText": "Cheers offers users to show greetings on the big screen!",
+        "GeneralContinue": "Continue",
+        "GeneralCancel": "Cancel",
+        "GeneralSave": "Save"
+      }
+    },
+    {
+      "name": "Telugu",
+      "iana": "te",
+      "iso": "te",
+      "fontFamily": "Noto Sans Telugu",
+      "fontUrl": "https://fonts.googleapis.com/earlyaccess/notosanstelugu.css",
+      "values": {
+        "WelcomeText": "చీర్స్ వినియోగదారులకు పెద్ద తెరపై శుభాకాంక్షలు చూపిస్తుంది!",
+        "GeneralContinue": "కొనసాగించు",
+        "GeneralCancel": "రద్దు చేయి"
+      }
+    }
+  ]
+}
