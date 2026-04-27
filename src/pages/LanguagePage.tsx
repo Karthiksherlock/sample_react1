@@ -20,36 +20,14 @@ export interface LanguagesFile {
   languages: Language[];
 }
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
-const FALLBACK_URL = "/languages.json";
-
 async function fetchLanguages(): Promise<LanguagesFile> {
-  if (API_BASE) {
-    try {
-      const res = await fetch(`${API_BASE}/languages`);
-      if (res.ok) return (await res.json()) as LanguagesFile;
-      console.warn("API GET failed, falling back to /languages.json");
-    } catch (err) {
-      console.warn("API GET error, falling back to /languages.json", err);
-    }
-  }
-  const res = await fetch(FALLBACK_URL);
-  return (await res.json()) as LanguagesFile;
+  const res = await fetch("/languages.json");
+  return res.json();
 }
 
 async function saveLanguages(data: LanguagesFile): Promise<LanguagesFile> {
-  if (!API_BASE) {
-    // No API configured: simulate a round-trip.
-    console.info("[saveLanguages] No VITE_API_BASE_URL set — simulating save.", data);
-    return data;
-  }
-  const res = await fetch(`${API_BASE}/languages`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) throw new Error(`Save failed: ${res.status} ${res.statusText}`);
-  return (await res.json()) as LanguagesFile;
+  console.log("Saving languages:", data);
+  return data;
 }
 
 export default function LanguagePage() {
