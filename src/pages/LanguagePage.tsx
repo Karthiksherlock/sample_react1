@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Header from "../components/language/Header";
 import Tabs from "../components/language/Tabs";
-import AddLanguageModal from "../components/language/AddLanguageModal.tsx";
-import AddMicroCopyModal from "../components/language/AddMicroCopyModal.tsx";
-import MicroCopyItem from "../components/language/MicroCopyItem.tsx";
+import AddLanguageModal from "../components/language/AddLanguageModal";
+import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
+import MicroCopyItem from "../components/language/MicroCopyItem";
 
 function LanguagePage() {
   const [languages, setLanguages] = useState<string[]>(["English"]);
@@ -25,7 +25,8 @@ function LanguagePage() {
   ]);
 
   const handleSaveLanguage = (newLang: string) => {
-    if (languages.includes(newLang)) return;
+    if (languages.some((l) => l.toLowerCase() === newLang.toLowerCase()))
+      return;
 
     setLanguages((prev) => [...prev, newLang]);
     setSelectedLanguage(newLang);
@@ -42,6 +43,8 @@ function LanguagePage() {
   };
 
   const handleSaveMicroCopy = (newKey: string) => {
+    if (keys.some((item) => item.key === newKey)) return;
+
     const values: { [lang: string]: string } = {};
     languages.forEach((lang) => {
       values[lang] = "";
@@ -72,9 +75,13 @@ function LanguagePage() {
     );
   };
 
-  const filteredKeys = keys.filter((item) => {
-    const s = search.trim().toLowerCase();
+  const deleteMicroCopy = (keyName: string) => {
+    setKeys((prev) => prev.filter((item) => item.key !== keyName));
+  };
 
+  const s = search.trim().toLowerCase();
+
+  const filteredKeys = keys.filter((item) => {
     const keyMatch = item.key.toLowerCase().includes(s);
     const valueMatch = item.values[selectedLanguage]?.toLowerCase().includes(s);
 
@@ -109,6 +116,7 @@ function LanguagePage() {
           item={item}
           selectedLanguage={selectedLanguage}
           onChange={updateMicroCopyValue}
+          onDelete={deleteMicroCopy}
         />
       ))}
 
