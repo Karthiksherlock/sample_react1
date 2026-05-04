@@ -3,10 +3,10 @@ import { useState } from "react";
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSave: (lang: string) => void;
+  onSave: (key: string) => void;
 };
 
-function AddLanguageModal({ open, onClose, onSave }: Props) {
+function AddMicroCopyModal({ open, onClose, onSave }: Props) {
   const [value, setValue] = useState("");
 
   if (!open) return null;
@@ -20,7 +20,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
 
   return (
     <div>
-      <h2>Add Language</h2>
+      <h2>Add Micro-copy</h2>
       <input
         type="text"
         value={value}
@@ -39,4 +39,4 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
   );
 }
 
-export default AddLanguageModal;
+export default AddMicroCopyModal;

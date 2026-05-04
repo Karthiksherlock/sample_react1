@@ -1,13 +1,16 @@
 import { useState } from "react";
 import Header from "../components/language/Header";
 import Tabs from "../components/language/Tabs";
-import AddLanguageModal from "../components/language/AddLanguageModal";
+import AddLanguageModal from "../components/language/AddLanguageModal.tsx";
+import AddMicroCopyModal from "../components/language/AddMicroCopyModal.tsx";
+import MicroCopyItem from "../components/language/MicroCopyItem.tsx";
 
 function LanguagePage() {
   const [languages, setLanguages] = useState<string[]>(["English"]);
   const [selectedLanguage, setSelectedLanguage] = useState("English");
   const [search, setSearch] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLangModalOpen, setIsLangModalOpen] = useState(false);
+  const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
 
   const [keys, setKeys] = useState<
     {
@@ -22,7 +25,10 @@ function LanguagePage() {
   ]);
 
   const handleSaveLanguage = (newLang: string) => {
+    if (languages.includes(newLang)) return;
+
     setLanguages((prev) => [...prev, newLang]);
+    setSelectedLanguage(newLang);
 
     setKeys((prev) =>
       prev.map((item) => ({
@@ -35,10 +41,7 @@ function LanguagePage() {
     );
   };
 
-  const handleAddMicroCopy = () => {
-    const newKey = prompt("Enter key name");
-    if (!newKey) return;
-
+  const handleSaveMicroCopy = (newKey: string) => {
     const values: { [lang: string]: string } = {};
     languages.forEach((lang) => {
       values[lang] = "";
@@ -53,7 +56,7 @@ function LanguagePage() {
     ]);
   };
 
-  const updateValue = (keyName: string, value: string) => {
+  const updateMicroCopyValue = (keyName: string, value: string) => {
     setKeys((prev) =>
       prev.map((item) =>
         item.key === keyName
@@ -70,11 +73,10 @@ function LanguagePage() {
   };
 
   const filteredKeys = keys.filter((item) => {
-    const keyMatch = item.key.toLowerCase().includes(search.toLowerCase());
+    const s = search.trim().toLowerCase();
 
-    const valueMatch = item.values[selectedLanguage]
-      ?.toLowerCase()
-      .includes(search.toLowerCase());
+    const keyMatch = item.key.toLowerCase().includes(s);
+    const valueMatch = item.values[selectedLanguage]?.toLowerCase().includes(s);
 
     return keyMatch || valueMatch;
   });
@@ -82,8 +84,8 @@ function LanguagePage() {
   return (
     <div>
       <Header
-        onAddLanguage={() => setIsModalOpen(true)}
-        onAddMicroCopy={handleAddMicroCopy}
+        onAddLanguage={() => setIsLangModalOpen(true)}
+        onAddMicroCopy={() => setIsKeyModalOpen(true)}
       />
 
       <Tabs
@@ -99,21 +101,27 @@ function LanguagePage() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
+      {filteredKeys.length === 0 && <p>No results</p>}
+
       {filteredKeys.map((item) => (
-        <div key={item.key}>
-          <strong>{item.key}</strong>
-          <input
-            type="text"
-            value={item.values[selectedLanguage] || ""}
-            onChange={(e) => updateValue(item.key, e.target.value)}
-          />
-        </div>
+        <MicroCopyItem
+          key={item.key}
+          item={item}
+          selectedLanguage={selectedLanguage}
+          onChange={updateMicroCopyValue}
+        />
       ))}
 
       <AddLanguageModal
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        open={isLangModalOpen}
+        onClose={() => setIsLangModalOpen(false)}
         onSave={handleSaveLanguage}
+      />
+
+      <AddMicroCopyModal
+        open={isKeyModalOpen}
+        onClose={() => setIsKeyModalOpen(false)}
+        onSave={handleSaveMicroCopy}
       />
     </div>
   );
