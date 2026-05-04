@@ -1,8 +1,13 @@
 import { useState } from "react";
 import Header from "../components/language/Header";
+import Tabs from "../components/language/Tabs";
+import AddLanguageModal from "../components/language/AddLanguageModal";
 
 function LanguagePage() {
   const [languages, setLanguages] = useState<string[]>(["English"]);
+  const [selectedLanguage, setSelectedLanguage] = useState("English");
+  const [search, setSearch] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [keys, setKeys] = useState<
     {
@@ -16,11 +21,7 @@ function LanguagePage() {
     },
   ]);
 
-  const handleAddLanguage = () => {
-    const newLang = prompt("Enter language name");
-
-    if (!newLang) return;
-
+  const handleSaveLanguage = (newLang: string) => {
     setLanguages((prev) => [...prev, newLang]);
 
     setKeys((prev) =>
@@ -34,20 +35,15 @@ function LanguagePage() {
     );
   };
 
-  // ➕ Add Micro-copy (KEY only)
   const handleAddMicroCopy = () => {
     const newKey = prompt("Enter key name");
-
     if (!newKey) return;
 
-    // Create values for all languages
     const values: { [lang: string]: string } = {};
-
     languages.forEach((lang) => {
       values[lang] = "";
     });
 
-    // Add new key
     setKeys((prev) => [
       ...prev,
       {
@@ -57,33 +53,68 @@ function LanguagePage() {
     ]);
   };
 
+  const updateValue = (keyName: string, value: string) => {
+    setKeys((prev) =>
+      prev.map((item) =>
+        item.key === keyName
+          ? {
+              ...item,
+              values: {
+                ...item.values,
+                [selectedLanguage]: value,
+              },
+            }
+          : item,
+      ),
+    );
+  };
+
+  const filteredKeys = keys.filter((item) => {
+    const keyMatch = item.key.toLowerCase().includes(search.toLowerCase());
+
+    const valueMatch = item.values[selectedLanguage]
+      ?.toLowerCase()
+      .includes(search.toLowerCase());
+
+    return keyMatch || valueMatch;
+  });
+
   return (
     <div>
-      {/* Header */}
       <Header
-        onAddLanguage={handleAddLanguage}
+        onAddLanguage={() => setIsModalOpen(true)}
         onAddMicroCopy={handleAddMicroCopy}
       />
 
-      {/* Languages List */}
-      <h2>Languages</h2>
-      {languages.map((lang) => (
-        <div key={lang}>{lang}</div>
-      ))}
+      <Tabs
+        languages={languages}
+        selected={selectedLanguage}
+        onChange={setSelectedLanguage}
+      />
 
-      {/* Keys + Values */}
-      <h2>Micro-copies</h2>
-      {keys.map((item) => (
+      <input
+        type="text"
+        placeholder="Search..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      {filteredKeys.map((item) => (
         <div key={item.key}>
           <strong>{item.key}</strong>
-
-          {languages.map((lang) => (
-            <div key={lang}>
-              {lang}: {item.values[lang]}
-            </div>
-          ))}
+          <input
+            type="text"
+            value={item.values[selectedLanguage] || ""}
+            onChange={(e) => updateValue(item.key, e.target.value)}
+          />
         </div>
       ))}
+
+      <AddLanguageModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSaveLanguage}
+      />
     </div>
   );
 }
