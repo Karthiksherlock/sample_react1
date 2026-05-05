@@ -1,0 +1,12 @@
+{
+  "English": {
+    "welcome": "Hello",
+    "logout": "Logout",
+    "enter": "Type"
+  },
+  "Tamil": {
+    "welcome": "Vanakkam",
+    "logout": "Veliyeru",
+    "enter": "தட்டச்சு"
+  }
+}
