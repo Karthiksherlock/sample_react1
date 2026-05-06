@@ -5,12 +5,7 @@ type Props = {
   onExport: () => void;
 };
 
-function Header({
-  onAddLanguage,
-  onAddMicroCopy,
-  onSave,
-  onExport,
-}: Props) {
+function Header({ onAddLanguage, onAddMicroCopy, onSave, onExport }: Props) {
   return (
     <div>
       <h2>Language Editor</h2>
