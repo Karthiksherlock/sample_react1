@@ -1,16 +1,24 @@
-type HeaderProps = {
+type Props = {
   onAddLanguage: () => void;
   onAddMicroCopy: () => void;
   onSave: () => void;
+  onExport: () => void;
 };
 
-function Header({ onAddLanguage, onAddMicroCopy, onSave }: HeaderProps) {
+function Header({
+  onAddLanguage,
+  onAddMicroCopy,
+  onSave,
+  onExport,
+}: Props) {
   return (
     <div>
-      <h1>Languages</h1>
+      <h2>Language Editor</h2>
+      <p>Manage languages.json across supported locales</p>
+
+      <button onClick={onExport}>Export JSON</button>
+      <button onClick={onSave}>Save changes</button>
       <button onClick={onAddLanguage}>Add Language</button>
-      <button onClick={onAddMicroCopy}>Add Micro-copy</button>
-      <button onClick={onSave}>Save Changes</button>
     </div>
   );
 }

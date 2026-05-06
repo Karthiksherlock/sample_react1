@@ -20,21 +20,15 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
 
   return (
     <div>
-      <h2>Add Language</h2>
+      <h3>Add Language</h3>
+
       <input
-        type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
+
       <button onClick={handleSave}>Save</button>
-      <button
-        onClick={() => {
-          setValue("");
-          onClose();
-        }}
-      >
-        Cancel
-      </button>
+      <button onClick={onClose}>Cancel</button>
     </div>
   );
 }

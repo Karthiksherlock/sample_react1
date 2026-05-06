@@ -20,21 +20,12 @@ function AddMicroCopyModal({ open, onClose, onSave }: Props) {
 
   return (
     <div>
-      <h2>Add Micro-copy</h2>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
+      <h3>Add Micro-copy</h3>
+
+      <input value={value} onChange={(e) => setValue(e.target.value)} />
+
       <button onClick={handleSave}>Save</button>
-      <button
-        onClick={() => {
-          setValue("");
-          onClose();
-        }}
-      >
-        Cancel
-      </button>
+      <button onClick={onClose}>Cancel</button>
     </div>
   );
 }

@@ -1,23 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/language/Header";
 import Tabs from "../components/language/Tabs";
+import MicroCopyItem from "../components/language/MicroCopyItem";
 import AddLanguageModal from "../components/language/AddLanguageModal";
 import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
-import MicroCopyItem from "../components/language/MicroCopyItem";
 
 function LanguagePage() {
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [keys, setKeys] = useState<any[]>([]);
   const [search, setSearch] = useState("");
-  const [isLangModalOpen, setIsLangModalOpen] = useState(false);
-  const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
 
-  const [keys, setKeys] = useState<
-    {
-      key: string;
-      values: { [lang: string]: string };
-    }[]
-  >([]);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
+  const [showKeyModal, setShowKeyModal] = useState(false);
 
   useEffect(() => {
     fetch("/languages.json")
@@ -49,14 +44,44 @@ function LanguagePage() {
       });
   }, []);
 
-  const handleSaveLanguage = (newLang: string) => {
-    const exists = languages.some(
-      (l) => l.toLowerCase() === newLang.toLowerCase(),
+  const handleValueChange = (key: string, value: string) => {
+    setKeys((prev) =>
+      prev.map((item) =>
+        item.key === key
+          ? {
+              ...item,
+              values: {
+                ...item.values,
+                [selectedLanguage]: value,
+              },
+            }
+          : item
+      )
     );
+  };
+
+  const handleAddKey = (newKey: string) => {
+    const exists = keys.some((k) => k.key === newKey);
+    if (exists) return;
+
+    const newItem: any = { key: newKey, values: {} };
+
+    languages.forEach((lang) => {
+      newItem.values[lang] = "";
+    });
+
+    setKeys((prev) => [...prev, newItem]);
+  };
+
+  const handleDeleteKey = (key: string) => {
+    setKeys((prev) => prev.filter((item) => item.key !== key));
+  };
+
+  const handleAddLanguage = (newLang: string) => {
+    const exists = languages.includes(newLang);
     if (exists) return;
 
     setLanguages((prev) => [...prev, newLang]);
-    setSelectedLanguage(newLang);
 
     setKeys((prev) =>
       prev.map((item) => ({
@@ -65,57 +90,7 @@ function LanguagePage() {
           ...item.values,
           [newLang]: "",
         },
-      })),
-    );
-  };
-
-  const handleSaveMicroCopy = (newKey: string) => {
-    const exists = keys.some((item) => item.key === newKey);
-    if (exists) return;
-
-    const values: { [lang: string]: string } = {};
-    languages.forEach((lang) => {
-      values[lang] = "";
-    });
-
-    setKeys((prev) => [
-      ...prev,
-      {
-        key: newKey,
-        values,
-      },
-    ]);
-  };
-
-  const updateMicroCopyValue = (keyName: string, value: string) => {
-    setKeys((prev) =>
-      prev.map((item) =>
-        item.key === keyName
-          ? {
-              ...item,
-              values: {
-                ...item.values,
-                [selectedLanguage]: value,
-              },
-            }
-          : item,
-      ),
-    );
-  };
-
-  const deleteMicroCopyValue = (keyName: string) => {
-    setKeys((prev) =>
-      prev.map((item) =>
-        item.key === keyName
-          ? {
-              ...item,
-              values: {
-                ...item.values,
-                [selectedLanguage]: "",
-              },
-            }
-          : item,
-      ),
+      }))
     );
   };
 
@@ -171,26 +146,43 @@ function LanguagePage() {
     }, 500);
   };
 
-  const s = search.trim().toLowerCase();
+  const handleExport = () => {
+    const data = convertToApiFormat();
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+      type: "application/json",
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "languages.json";
+    a.click();
+
+    URL.revokeObjectURL(url);
+  };
 
   const filteredKeys = keys.filter((item) => {
-    const keyMatch = item.key.toLowerCase().includes(s);
-    const valueMatch = item.values[selectedLanguage]?.toLowerCase().includes(s);
-    return keyMatch || valueMatch;
+    const value = item.values[selectedLanguage] || "";
+    return (
+      item.key.toLowerCase().includes(search.toLowerCase()) ||
+      value.toLowerCase().includes(search.toLowerCase())
+    );
   });
 
   return (
     <div>
       <Header
-        onAddLanguage={() => setIsLangModalOpen(true)}
-        onAddMicroCopy={() => setIsKeyModalOpen(true)}
+        onAddLanguage={() => setShowLanguageModal(true)}
+        onAddMicroCopy={() => setShowKeyModal(true)}
         onSave={handleSave}
+        onExport={handleExport}
       />
 
       <Tabs
         languages={languages}
-        selected={selectedLanguage}
-        onChange={setSelectedLanguage}
+        selectedLanguage={selectedLanguage}
+        onSelect={setSelectedLanguage}
       />
 
       <input
@@ -200,28 +192,30 @@ function LanguagePage() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {filteredKeys.length === 0 && <p>No results</p>}
+      <button onClick={() => setShowKeyModal(true)}>
+        Add micro-copy
+      </button>
 
       {filteredKeys.map((item) => (
         <MicroCopyItem
           key={item.key}
           item={item}
           selectedLanguage={selectedLanguage}
-          onChange={updateMicroCopyValue}
-          onDelete={deleteMicroCopyValue}
+          onChange={handleValueChange}
+          onDelete={handleDeleteKey}
         />
       ))}
 
       <AddLanguageModal
-        open={isLangModalOpen}
-        onClose={() => setIsLangModalOpen(false)}
-        onSave={handleSaveLanguage}
+        open={showLanguageModal}
+        onClose={() => setShowLanguageModal(false)}
+        onSave={handleAddLanguage}
       />
 
       <AddMicroCopyModal
-        open={isKeyModalOpen}
-        onClose={() => setIsKeyModalOpen(false)}
-        onSave={handleSaveMicroCopy}
+        open={showKeyModal}
+        onClose={() => setShowKeyModal(false)}
+        onSave={handleAddKey}
       />
     </div>
   );

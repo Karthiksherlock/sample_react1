@@ -1,15 +1,18 @@
-type TabsProps = {
+type Props = {
   languages: string[];
-  selected: string;
-  onChange: (lang: string) => void;
+  selectedLanguage: string;
+  onSelect: (lang: string) => void;
 };
 
-function Tabs({ languages, selected, onChange }: TabsProps) {
+function Tabs({ languages, selectedLanguage, onSelect }: Props) {
   return (
     <div>
       {languages.map((lang) => (
-        <button key={lang} onClick={() => onChange(lang)}>
-          {lang} {selected === lang ? "(Active)" : ""}
+        <button
+          key={lang}
+          onClick={() => onSelect(lang)}
+        >
+          {lang} {selectedLanguage === lang ? "(Selected)" : ""}
         </button>
       ))}
     </div>
