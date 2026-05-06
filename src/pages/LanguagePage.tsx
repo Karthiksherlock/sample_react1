@@ -4,7 +4,7 @@ import Tabs from "../components/language/Tabs";
 import MicroCopyItem from "../components/language/MicroCopyItem";
 import AddLanguageModal from "../components/language/AddLanguageModal";
 import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
-
+import "../LanguagePage.css";
 function LanguagePage() {
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
@@ -55,8 +55,8 @@ function LanguagePage() {
                 [selectedLanguage]: value,
               },
             }
-          : item
-      )
+          : item,
+      ),
     );
   };
 
@@ -90,7 +90,7 @@ function LanguagePage() {
           ...item.values,
           [newLang]: "",
         },
-      }))
+      })),
     );
   };
 
@@ -171,10 +171,9 @@ function LanguagePage() {
   });
 
   return (
-    <div>
+    <div className="page">
       <Header
         onAddLanguage={() => setShowLanguageModal(true)}
-        onAddMicroCopy={() => setShowKeyModal(true)}
         onSave={handleSave}
         onExport={handleExport}
       />
@@ -185,26 +184,42 @@ function LanguagePage() {
         onSelect={setSelectedLanguage}
       />
 
-      <input
-        type="text"
-        placeholder="Search..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="main">
+        <div className="languagebox">
+          <p>Language details</p>
+        </div>
 
-      <button onClick={() => setShowKeyModal(true)}>
-        Add micro-copy
-      </button>
+        <div className="microcopybox">
+          <div className="microcopyheader">
+            <h3>Micro-copies</h3>
 
-      {filteredKeys.map((item) => (
-        <MicroCopyItem
-          key={item.key}
-          item={item}
-          selectedLanguage={selectedLanguage}
-          onChange={handleValueChange}
-          onDelete={handleDeleteKey}
-        />
-      ))}
+            <div className="microcopyactions">
+              <input
+                type="text"
+                placeholder="🔍 Search keys or values..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+
+              <button onClick={() => setShowKeyModal(true)}>
+                + Add micro-copy
+              </button>
+            </div>
+          </div>
+
+          <div className="list">
+            {filteredKeys.map((item) => (
+              <MicroCopyItem
+                key={item.key}
+                item={item}
+                selectedLanguage={selectedLanguage}
+                onChange={handleValueChange}
+                onDelete={handleDeleteKey}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
 
       <AddLanguageModal
         open={showLanguageModal}
@@ -220,5 +235,4 @@ function LanguagePage() {
     </div>
   );
 }
-
 export default LanguagePage;

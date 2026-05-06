@@ -1,0 +1,52 @@
+.page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.main {
+  margin-top: 20px;
+}
+
+.languagebox {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.microcopybox {
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+.microcopyheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.microcopyactions {
+  display: flex;
+  gap: 10px;
+}
+
+.microcopyactions input {
+  padding: 6px;
+}
+
+.list {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headeractions {
+  display: flex;
+  gap: 10px;
+}
