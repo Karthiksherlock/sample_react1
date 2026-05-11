@@ -1,12 +1,27 @@
 {
   "English": {
-    "welcome": "Hello",
-    "logout": "Logout",
-    "enter": "Type"
+    "name": "English",
+    "iana_code": "en",
+    "iso_code": "en",
+    "font_url": "https://fonts.googleapis.com/css?family=Noto+Sans:400,600",
+    "font_family": "Noto Sans",
+    "micro_copies": {
+      "WelcomeText": "Cheers offers users to show greetings on the big screen!",
+      "GeneralContinue": "Continue",
+      "GeneralCancel": "Cancel",
+      "GeneralSubmit": "Submit"
+    }
   },
-  "Tamil": {
-    "welcome": "Vanakkam",
-    "logout": "Veliyeru",
-    "enter": "தட்டச்சு"
+  "Telugu": {
+    "name": "Telugu",
+    "iana_code": "te",
+    "iso_code": "te",
+    "font_url": "https://fonts.googleapis.com/earlyaccess/notosanstelugu.css",
+    "font_family": "Noto Sans Telugu",
+    "micro_copies": {
+      "WelcomeText": "చీర్స్ వినియోగదారులకు తమ శుభాకాంక్షలను పెద్ద స్క్రీన్‌పై చూపించడానికి అందిస్తుంది!",
+      "GeneralContinue": "కొనసాగించు",
+      "GeneralCancel": "రద్దు చేయి"
+    }
   }
 }

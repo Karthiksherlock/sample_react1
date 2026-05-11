@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
 import Header from "../components/language/Header";
 import Tabs from "../components/language/Tabs";
-import MicroCopyItem from "../components/language/MicroCopyItem";
 import AddLanguageModal from "../components/language/AddLanguageModal";
 import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
 import "../LanguagePage.css";
 
-type KeyItem = {
-  key: string;
-  values: {
-    [language: string]: string;
+type Language = {
+  name: string;
+  iana_code: string;
+  iso_code: string;
+  font_family: string;
+  font_url: string;
+  micro_copies: {
+    [key: string]: string;
   };
 };
 
+type LanguagesData = {
+  [language: string]: Language;
+};
+
 function LanguagePage() {
-  const [languages, setLanguages] = useState<string[]>([]);
+  const [languagesData, setLanguagesData] = useState<LanguagesData>({});
+
   const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [keys, setKeys] = useState<KeyItem[]>([]);
   const [search, setSearch] = useState("");
 
   const [showLanguageModal, setShowLanguageModal] = useState(false);
@@ -25,181 +32,27 @@ function LanguagePage() {
   useEffect(() => {
     fetch("/languages.json")
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: LanguagesData) => {
+        setLanguagesData(data);
+
         const langs = Object.keys(data);
 
-        setLanguages(langs);
-        setSelectedLanguage(langs[0]);
-
-        const allKeys = new Set<string>();
-
-        langs.forEach((lang) => {
-          Object.keys(data[lang]).forEach((k) => {
-            allKeys.add(k);
-          });
-        });
-
-        const formatted = Array.from(allKeys).map((key) => {
-          const values: Record<string, string> = {};
-
-          langs.forEach((lang) => {
-            values[lang] = data[lang][key] || "";
-          });
-
-          return {
-            key,
-            values,
-          };
-        });
-
-        setKeys(formatted);
+        if (langs.length > 0) {
+          setSelectedLanguage(langs[0]);
+        }
       });
   }, []);
 
-  const handleValueChange = (key: string, value: string) => {
-    setKeys((prev) =>
-      prev.map((item) =>
-        item.key === key
-          ? {
-              ...item,
-              values: {
-                ...item.values,
-                [selectedLanguage]: value,
-              },
-            }
-          : item,
-      ),
-    );
-  };
+  const languages = Object.keys(languagesData);
 
-  const handleAddKey = (newKey: string) => {
-    const exists = keys.some((k) => k.key === newKey);
-
-    if (exists) return;
-
-    const newItem: KeyItem = {
-      key: newKey,
-      values: {},
-    };
-
-    languages.forEach((lang) => {
-      newItem.values[lang] = "";
-    });
-
-    setKeys((prev) => [...prev, newItem]);
-  };
-
-  const handleDeleteKey = (key: string) => {
-    setKeys((prev) => prev.filter((item) => item.key !== key));
-  };
-
-  const handleAddLanguage = (newLang: string) => {
-    const exists = languages.includes(newLang);
-
-    if (exists) return;
-
-    setLanguages((prev) => [...prev, newLang]);
-
-    setKeys((prev) =>
-      prev.map((item) => ({
-        ...item,
-        values: {
-          ...item.values,
-          [newLang]: "",
-        },
-      })),
-    );
-  };
-
-  const convertToApiFormat = () => {
-    const result: Record<string, Record<string, string>> = {};
-
-    languages.forEach((lang) => {
-      result[lang] = {};
-    });
-
-    keys.forEach((item) => {
-      languages.forEach((lang) => {
-        result[lang][item.key] = item.values[lang] || "";
-      });
-    });
-
-    return result;
-  };
-
-  const handleSave = () => {
-    const payload = convertToApiFormat();
-
-    console.log("Saving to API:", payload);
-
-    setTimeout(() => {
-      alert("Saved successfully!");
-
-      const data = payload;
-
-      const langs = Object.keys(data);
-
-      setLanguages(langs);
-      setSelectedLanguage(langs[0]);
-
-      const allKeys = new Set<string>();
-
-      langs.forEach((lang) => {
-        Object.keys(data[lang]).forEach((k) => {
-          allKeys.add(k);
-        });
-      });
-
-      const formatted = Array.from(allKeys).map((key) => {
-        const values: Record<string, string> = {};
-
-        langs.forEach((lang) => {
-          values[lang] = data[lang][key] || "";
-        });
-
-        return {
-          key,
-          values,
-        };
-      });
-
-      setKeys(formatted);
-    }, 500);
-  };
-
-  const handleExport = () => {
-    const data = convertToApiFormat();
-
-    const blob = new Blob([JSON.stringify(data, null, 2)], {
-      type: "application/json",
-    });
-
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-
-    a.href = url;
-    a.download = "languages.json";
-    a.click();
-
-    URL.revokeObjectURL(url);
-  };
-
-  const filteredKeys = keys.filter((item) => {
-    const value = item.values[selectedLanguage] || "";
-
-    return (
-      item.key.toLowerCase().includes(search.toLowerCase()) ||
-      value.toLowerCase().includes(search.toLowerCase())
-    );
-  });
+  const microCopies = languagesData[selectedLanguage]?.micro_copies || {};
 
   return (
     <div className="page">
       <Header
         onAddLanguage={() => setShowLanguageModal(true)}
-        onSave={handleSave}
-        onExport={handleExport}
+        onSave={() => {}}
+        onExport={() => {}}
       />
 
       <Tabs
@@ -232,14 +85,12 @@ function LanguagePage() {
           </div>
 
           <div className="list">
-            {filteredKeys.map((item) => (
-              <MicroCopyItem
-                key={item.key}
-                item={item}
-                selectedLanguage={selectedLanguage}
-                onChange={handleValueChange}
-                onDelete={handleDeleteKey}
-              />
+            {Object.entries(microCopies).map(([key, value]) => (
+              <div key={key} className="micro-item">
+                <div className="micro-key">{key}</div>
+
+                <input className="micro-input" value={value} readOnly />
+              </div>
             ))}
           </div>
         </div>
@@ -248,13 +99,13 @@ function LanguagePage() {
       <AddLanguageModal
         open={showLanguageModal}
         onClose={() => setShowLanguageModal(false)}
-        onSave={handleAddLanguage}
+        onSave={() => {}}
       />
 
       <AddMicroCopyModal
         open={showKeyModal}
         onClose={() => setShowKeyModal(false)}
-        onSave={handleAddKey}
+        onSave={() => {}}
       />
     </div>
   );
