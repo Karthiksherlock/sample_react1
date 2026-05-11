@@ -5,10 +5,18 @@ import MicroCopyItem from "../components/language/MicroCopyItem";
 import AddLanguageModal from "../components/language/AddLanguageModal";
 import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
 import "../LanguagePage.css";
+
+type KeyItem = {
+  key: string;
+  values: {
+    [language: string]: string;
+  };
+};
+
 function LanguagePage() {
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [keys, setKeys] = useState<any[]>([]);
+  const [keys, setKeys] = useState<KeyItem[]>([]);
   const [search, setSearch] = useState("");
 
   const [showLanguageModal, setShowLanguageModal] = useState(false);
@@ -19,6 +27,7 @@ function LanguagePage() {
       .then((res) => res.json())
       .then((data) => {
         const langs = Object.keys(data);
+
         setLanguages(langs);
         setSelectedLanguage(langs[0]);
 
@@ -31,13 +40,16 @@ function LanguagePage() {
         });
 
         const formatted = Array.from(allKeys).map((key) => {
-          const values: any = {};
+          const values: Record<string, string> = {};
 
           langs.forEach((lang) => {
             values[lang] = data[lang][key] || "";
           });
 
-          return { key, values };
+          return {
+            key,
+            values,
+          };
         });
 
         setKeys(formatted);
@@ -62,9 +74,13 @@ function LanguagePage() {
 
   const handleAddKey = (newKey: string) => {
     const exists = keys.some((k) => k.key === newKey);
+
     if (exists) return;
 
-    const newItem: any = { key: newKey, values: {} };
+    const newItem: KeyItem = {
+      key: newKey,
+      values: {},
+    };
 
     languages.forEach((lang) => {
       newItem.values[lang] = "";
@@ -79,6 +95,7 @@ function LanguagePage() {
 
   const handleAddLanguage = (newLang: string) => {
     const exists = languages.includes(newLang);
+
     if (exists) return;
 
     setLanguages((prev) => [...prev, newLang]);
@@ -95,7 +112,7 @@ function LanguagePage() {
   };
 
   const convertToApiFormat = () => {
-    const result: any = {};
+    const result: Record<string, Record<string, string>> = {};
 
     languages.forEach((lang) => {
       result[lang] = {};
@@ -121,6 +138,7 @@ function LanguagePage() {
       const data = payload;
 
       const langs = Object.keys(data);
+
       setLanguages(langs);
       setSelectedLanguage(langs[0]);
 
@@ -133,13 +151,16 @@ function LanguagePage() {
       });
 
       const formatted = Array.from(allKeys).map((key) => {
-        const values: any = {};
+        const values: Record<string, string> = {};
 
         langs.forEach((lang) => {
           values[lang] = data[lang][key] || "";
         });
 
-        return { key, values };
+        return {
+          key,
+          values,
+        };
       });
 
       setKeys(formatted);
@@ -148,6 +169,7 @@ function LanguagePage() {
 
   const handleExport = () => {
     const data = convertToApiFormat();
+
     const blob = new Blob([JSON.stringify(data, null, 2)], {
       type: "application/json",
     });
@@ -155,6 +177,7 @@ function LanguagePage() {
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement("a");
+
     a.href = url;
     a.download = "languages.json";
     a.click();
@@ -164,6 +187,7 @@ function LanguagePage() {
 
   const filteredKeys = keys.filter((item) => {
     const value = item.values[selectedLanguage] || "";
+
     return (
       item.key.toLowerCase().includes(search.toLowerCase()) ||
       value.toLowerCase().includes(search.toLowerCase())
@@ -235,4 +259,5 @@ function LanguagePage() {
     </div>
   );
 }
+
 export default LanguagePage;

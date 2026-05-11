@@ -1,27 +1,61 @@
-.page {
-  padding: 20px;
+body {
+  margin: 0;
+  background-color: #f5f7fb;
   font-family: Arial, sans-serif;
 }
 
-.main {
-  margin-top: 20px;
+.page {
+  padding: 24px;
 }
 
-.languagebox {
-  border: 1px solid #ddd;
-  padding: 15px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
+.header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header p {
+  margin-top: 5px;
+  color: gray;
+}
+
+.headeractions {
+  display: flex;
+  gap: 10px;
+}
+
+.headeractions button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.languagebox,
 .microcopybox {
-  border: 1px solid #ddd;
-  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
 }
 
 .microcopyheader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .microcopyactions {
@@ -30,23 +64,64 @@
 }
 
 .microcopyactions input {
-  padding: 6px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 250px;
+}
+
+.microcopyactions button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .list {
-  margin-top: 15px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
-.header {
+.tab,
+.active-tab {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #2563eb;
+  color: white;
+}
+
+.tab {
+  background-color: white;
+}
+.micro-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 15px;
+  border: 1px solid #e5e7eb;
+  padding: 14px;
+  border-radius: 8px;
+  background: #fafafa;
 }
 
-.headeractions {
-  display: flex;
-  gap: 10px;
+.micro-key {
+  width: 180px;
+  font-weight: 600;
+}
+
+.micro-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.deletebtn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }

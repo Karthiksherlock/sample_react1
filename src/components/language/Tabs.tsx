@@ -10,9 +10,10 @@ function Tabs({ languages, selectedLanguage, onSelect }: Props) {
       {languages.map((lang) => (
         <button
           key={lang}
+          className={selectedLanguage === lang ? "active-tab" : "tab"}
           onClick={() => onSelect(lang)}
         >
-          {lang} {selectedLanguage === lang ? "(Selected)" : ""}
+          {lang}
         </button>
       ))}
     </div>
