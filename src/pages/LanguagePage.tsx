@@ -46,6 +46,21 @@ function LanguagePage() {
   const languages = Object.keys(languagesData);
 
   const microCopies = languagesData[selectedLanguage]?.micro_copies || {};
+  const handleValueChange = (key: string, value: string) => {
+    setLanguagesData((prev) => ({
+      ...prev,
+
+      [selectedLanguage]: {
+        ...prev[selectedLanguage],
+
+        micro_copies: {
+          ...prev[selectedLanguage].micro_copies,
+
+          [key]: value,
+        },
+      },
+    }));
+  };
 
   return (
     <div className="page">
@@ -88,8 +103,11 @@ function LanguagePage() {
             {Object.entries(microCopies).map(([key, value]) => (
               <div key={key} className="micro-item">
                 <div className="micro-key">{key}</div>
-
-                <input className="micro-input" value={value} readOnly />
+                <input
+                  className="micro-input"
+                  value={value}
+                  onChange={(e) => handleValueChange(key, e.target.value)}
+                />
               </div>
             ))}
           </div>
