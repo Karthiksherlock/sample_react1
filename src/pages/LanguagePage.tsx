@@ -46,6 +46,16 @@ function LanguagePage() {
   const languages = Object.keys(languagesData);
 
   const microCopies = languagesData[selectedLanguage]?.micro_copies || {};
+
+  const filteredMicroCopies = Object.entries(microCopies).filter(
+    ([key, value]) => {
+      return (
+        key.toLowerCase().includes(search.toLowerCase()) ||
+        value.toLowerCase().includes(search.toLowerCase())
+      );
+    },
+  );
+
   const handleValueChange = (key: string, value: string) => {
     setLanguagesData((prev) => ({
       ...prev,
@@ -60,6 +70,26 @@ function LanguagePage() {
         },
       },
     }));
+  };
+
+  const handleDeleteKey = (keyToDelete: string) => {
+    setLanguagesData((prev) => {
+      const updatedMicroCopies = {
+        ...prev[selectedLanguage].micro_copies,
+      };
+
+      delete updatedMicroCopies[keyToDelete];
+
+      return {
+        ...prev,
+
+        [selectedLanguage]: {
+          ...prev[selectedLanguage],
+
+          micro_copies: updatedMicroCopies,
+        },
+      };
+    });
   };
 
   return (
@@ -100,14 +130,22 @@ function LanguagePage() {
           </div>
 
           <div className="list">
-            {Object.entries(microCopies).map(([key, value]) => (
+            {filteredMicroCopies.map(([key, value]) => (
               <div key={key} className="micro-item">
                 <div className="micro-key">{key}</div>
+
                 <input
                   className="micro-input"
                   value={value}
                   onChange={(e) => handleValueChange(key, e.target.value)}
                 />
+
+                <button
+                  className="deletebtn"
+                  onClick={() => handleDeleteKey(key)}
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>
