@@ -92,11 +92,40 @@ function LanguagePage() {
     });
   };
 
+  const handleAddKey = (newKey: string) => {
+    if (!newKey.trim()) return;
+
+    const exists = microCopies[newKey] !== undefined;
+
+    if (exists) return;
+
+    setLanguagesData((prev) => ({
+      ...prev,
+
+      [selectedLanguage]: {
+        ...prev[selectedLanguage],
+
+        micro_copies: {
+          ...prev[selectedLanguage].micro_copies,
+
+          [newKey]: "",
+        },
+      },
+    }));
+  };
+  const handleSave = () => {
+    console.log("Saving:", languagesData);
+
+    setTimeout(() => {
+      alert("Saved successfully!");
+    }, 500);
+  };
+
   return (
     <div className="page">
       <Header
         onAddLanguage={() => setShowLanguageModal(true)}
-        onSave={() => {}}
+        onSave={handleSave}
         onExport={() => {}}
       />
 
@@ -161,7 +190,7 @@ function LanguagePage() {
       <AddMicroCopyModal
         open={showKeyModal}
         onClose={() => setShowKeyModal(false)}
-        onSave={() => {}}
+        onSave={handleAddKey}
       />
     </div>
   );
