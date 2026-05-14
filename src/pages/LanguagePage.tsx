@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Header from "../components/language/Header";
 import Tabs from "../components/language/Tabs";
-import AddLanguageModal from "../components/language/AddLanguageModal";
-import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
+import AddLanguageModal, {
+  type NewLanguage,
+} from "../components/language/AddLanguageModal";
 import "../LanguagePage.css";
+import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
 
 type Language = {
   name: string;
@@ -120,13 +122,48 @@ function LanguagePage() {
       alert("Saved successfully!");
     }, 500);
   };
+  const handleExport = () => {
+    const blob = new Blob([JSON.stringify(languagesData, null, 2)], {
+      type: "application/json",
+    });
 
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "languages.json";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+  };
+
+  const handleAddLanguage = (newLanguage: NewLanguage) => {
+    if (!newLanguage.name.trim()) return;
+
+    const exists = languagesData[newLanguage.name] !== undefined;
+
+    if (exists) return;
+
+    setLanguagesData((prev) => ({
+      ...prev,
+
+      [newLanguage.name]: {
+        ...newLanguage,
+
+        micro_copies: {},
+      },
+    }));
+
+    setSelectedLanguage(newLanguage.name);
+  };
   return (
     <div className="page">
       <Header
         onAddLanguage={() => setShowLanguageModal(true)}
         onSave={handleSave}
-        onExport={() => {}}
+        onExport={handleExport}
       />
 
       <Tabs
@@ -184,7 +221,7 @@ function LanguagePage() {
       <AddLanguageModal
         open={showLanguageModal}
         onClose={() => setShowLanguageModal(false)}
-        onSave={() => {}}
+        onSave={handleAddLanguage}
       />
 
       <AddMicroCopyModal
