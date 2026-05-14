@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import Header from "../components/language/Header";
 import Tabs from "../components/language/Tabs";
 import AddLanguageModal, {
@@ -6,6 +7,7 @@ import AddLanguageModal, {
 } from "../components/language/AddLanguageModal";
 import "../LanguagePage.css";
 import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
+import MicroCopyItem from "../components/language/MicroCopyItem";
 
 type Language = {
   name: string;
@@ -32,16 +34,19 @@ function LanguagePage() {
   const [showKeyModal, setShowKeyModal] = useState(false);
 
   useEffect(() => {
-    fetch("/languages.json")
-      .then((res) => res.json())
-      .then((data: LanguagesData) => {
+    axios
+      .get<LanguagesData>("/languages.json")
+      .then((response) => {
+        const data = response.data;
         setLanguagesData(data);
 
         const langs = Object.keys(data);
-
         if (langs.length > 0) {
           setSelectedLanguage(langs[0]);
         }
+      })
+      .catch((error) => {
+        console.log("Error fetching languages:", error);
       });
   }, []);
 
@@ -197,22 +202,13 @@ function LanguagePage() {
 
           <div className="list">
             {filteredMicroCopies.map(([key, value]) => (
-              <div key={key} className="micro-item">
-                <div className="micro-key">{key}</div>
-
-                <input
-                  className="micro-input"
-                  value={value}
-                  onChange={(e) => handleValueChange(key, e.target.value)}
-                />
-
-                <button
-                  className="deletebtn"
-                  onClick={() => handleDeleteKey(key)}
-                >
-                  Delete
-                </button>
-              </div>
+              <MicroCopyItem
+                key={key}
+                microCopyKey={key}
+                value={value}
+                onChange={handleValueChange}
+                onDelete={handleDeleteKey}
+              />
             ))}
           </div>
         </div>

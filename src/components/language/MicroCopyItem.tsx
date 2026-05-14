@@ -1,34 +1,44 @@
-type KeyItem = {
-  key: string;
-  values: {
-    [language: string]: string;
-  };
-};
-
 type Props = {
-  item: KeyItem;
-  selectedLanguage: string;
-  onChange: (key: string, value: string) => void;
+  microCopyKey: string;
+  value: string;
+
+  onChange: (
+    key: string,
+    value: string,
+  ) => void;
+
   onDelete: (key: string) => void;
 };
 
 function MicroCopyItem({
-  item,
-  selectedLanguage,
+  microCopyKey,
+  value,
   onChange,
   onDelete,
 }: Props) {
   return (
     <div className="micro-item">
-      <div className="micro-key">{item.key}</div>
+      <div className="micro-key">
+        {microCopyKey}
+      </div>
 
       <input
         className="micro-input"
-        value={item.values[selectedLanguage] || ""}
-        onChange={(e) => onChange(item.key, e.target.value)}
+        value={value}
+        onChange={(e) =>
+          onChange(
+            microCopyKey,
+            e.target.value,
+          )
+        }
       />
 
-      <button className="deletebtn" onClick={() => onDelete(item.key)}>
+      <button
+        className="deletebtn"
+        onClick={() =>
+          onDelete(microCopyKey)
+        }
+      >
         Delete
       </button>
     </div>
