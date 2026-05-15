@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   open: boolean;
@@ -8,6 +8,13 @@ type Props = {
 
 function AddMicroCopyModal({ open, onClose, onSave }: Props) {
   const [value, setValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (open) {
+      inputRef.current?.focus();
+    }
+  }, [open]);
 
   if (!open) return null;
 
@@ -22,7 +29,11 @@ function AddMicroCopyModal({ open, onClose, onSave }: Props) {
     <div>
       <h3>Add Micro-copy</h3>
 
-      <input value={value} onChange={(e) => setValue(e.target.value)} />
+      <input
+        ref={inputRef}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
 
       <button onClick={handleSave}>Save</button>
       <button onClick={onClose}>Cancel</button>

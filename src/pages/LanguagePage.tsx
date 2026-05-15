@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import Header from "../components/language/Header";
 import Tabs from "../components/language/Tabs";
@@ -52,74 +52,83 @@ function LanguagePage() {
 
   const languages = Object.keys(languagesData);
 
-  const microCopies = languagesData[selectedLanguage]?.micro_copies || {};
+  const microCopies = languagesData[selectedLanguage]?.micro_copies;
 
-  const filteredMicroCopies = Object.entries(microCopies).filter(
-    ([key, value]) => {
+  const filteredMicroCopies = useMemo(() => {
+    return Object.entries(microCopies || {}).filter(([key, value]) => {
       return (
         key.toLowerCase().includes(search.toLowerCase()) ||
         value.toLowerCase().includes(search.toLowerCase())
       );
-    },
-  );
+    });
+  }, [microCopies, search]);
 
-  const handleValueChange = (key: string, value: string) => {
-    setLanguagesData((prev) => ({
-      ...prev,
-
-      [selectedLanguage]: {
-        ...prev[selectedLanguage],
-
-        micro_copies: {
-          ...prev[selectedLanguage].micro_copies,
-
-          [key]: value,
-        },
-      },
-    }));
-  };
-
-  const handleDeleteKey = (keyToDelete: string) => {
-    setLanguagesData((prev) => {
-      const updatedMicroCopies = {
-        ...prev[selectedLanguage].micro_copies,
-      };
-
-      delete updatedMicroCopies[keyToDelete];
-
-      return {
+  const handleValueChange = useCallback(
+    (key: string, value: string) => {
+      setLanguagesData((prev) => ({
         ...prev,
 
         [selectedLanguage]: {
           ...prev[selectedLanguage],
 
-          micro_copies: updatedMicroCopies,
+          micro_copies: {
+            ...prev[selectedLanguage].micro_copies,
+
+            [key]: value,
+          },
         },
-      };
-    });
-  };
+      }));
+    },
+    [selectedLanguage],
+  );
 
-  const handleAddKey = (newKey: string) => {
-    if (!newKey.trim()) return;
-
-    const exists = microCopies[newKey] !== undefined;
-
-    if (exists) return;
-
-    setLanguagesData((prev) => ({
-      ...prev,
-
-      [selectedLanguage]: {
-        ...prev[selectedLanguage],
-
-        micro_copies: {
+  const handleDeleteKey = useCallback(
+    (keyToDelete: string) => {
+      setLanguagesData((prev) => {
+        const updatedMicroCopies = {
           ...prev[selectedLanguage].micro_copies,
+        };
 
-          [newKey]: "",
+        delete updatedMicroCopies[keyToDelete];
+
+        return {
+          ...prev,
+
+          [selectedLanguage]: {
+            ...prev[selectedLanguage],
+
+            micro_copies: updatedMicroCopies,
+          },
+        };
+      });
+    },
+    [selectedLanguage],
+  );
+
+  const handleAddKey = useCallback(
+    (newKey: string) => {
+      if (!newKey.trim()) return;
+
+      const exists = microCopies?.[newKey] !== undefined;
+
+      if (exists) return;
+
+      setLanguagesData((prev) => ({
+        ...prev,
+
+        [selectedLanguage]: {
+          ...prev[selectedLanguage],
+
+          micro_copies: {
+            ...prev[selectedLanguage].micro_copies,
+
+            [newKey]: "",
+          },
         },
-      },
-    }));
-  };
+      }));
+    },
+    [microCopies, selectedLanguage],
+  );
   const handleSave = () => {
     console.log("Saving:", languagesData);
 
