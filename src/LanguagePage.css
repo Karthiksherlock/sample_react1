@@ -125,3 +125,36 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
+.languageheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.languageheader h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.languagedetails {
+  margin-top: 20px;
+}
+
+.detailitem {
+  margin-bottom: 16px;
+}
+
+.detailitem label {
+  display: block;
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.detailitem p {
+  margin: 0;
+  font-size: 14px;
+  color: #222;
+  word-break: break-word;
+}

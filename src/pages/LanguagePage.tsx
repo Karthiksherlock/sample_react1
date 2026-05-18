@@ -29,9 +29,11 @@ function LanguagePage() {
 
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
   const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [showKeyModal, setShowKeyModal] = useState(false);
+  const [showLanguageDetails, setShowLanguageDetails] = useState(false);
 
   useEffect(() => {
     axios
@@ -49,19 +51,26 @@ function LanguagePage() {
         console.log("Error fetching languages:", error);
       });
   }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [search]);
 
   const languages = Object.keys(languagesData);
 
   const microCopies = languagesData[selectedLanguage]?.micro_copies;
-
+  const selectedLanguageData = languagesData[selectedLanguage];
   const filteredMicroCopies = useMemo(() => {
     return Object.entries(microCopies || {}).filter(([key, value]) => {
       return (
-        key.toLowerCase().includes(search.toLowerCase()) ||
-        value.toLowerCase().includes(search.toLowerCase())
+        key.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        value.toLowerCase().includes(debouncedSearch.toLowerCase())
       );
     });
-  }, [microCopies, search]);
+  }, [microCopies, debouncedSearch]);
 
   const handleValueChange = useCallback(
     (key: string, value: string) => {
@@ -188,7 +197,34 @@ function LanguagePage() {
 
       <div className="main">
         <div className="languagebox">
-          <p>Language details</p>
+          <div
+            className="languageheader"
+            onClick={() => setShowLanguageDetails(!showLanguageDetails)}
+          >
+            <h3>Language details</h3>
+            <span>{showLanguageDetails ? "⌄" : "›"}</span>
+          </div>
+
+          {showLanguageDetails && (
+            <div className="languagedetails">
+              {[
+                ["Name", "name"],
+                ["IANA Code", "iana_code"],
+                ["ISO Code", "iso_code"],
+                ["Font Family", "font_family"],
+                ["Font URL", "font_url"],
+              ].map(([label, key]) => (
+                <div className="detailitem" key={key}>
+                  <label>{label}</label>
+                  <p>
+                    {String(
+                      selectedLanguageData?.[key as keyof Language] || "",
+                    )}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="microcopybox">
