@@ -97,33 +97,76 @@ body {
 .tab {
   background-color: white;
 }
-.micro-item {
+.microCopyCard {
   display: flex;
-  align-items: center;
-  gap: 15px;
-  border: 1px solid #e5e7eb;
-  padding: 14px;
-  border-radius: 8px;
-  background: #fafafa;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px;
+  border: 1px solid #dbe2ea;
+  border-radius: 12px;
+  background: white;
 }
 
-.micro-key {
-  width: 180px;
-  font-weight: 600;
-}
-
-.micro-input {
+.microCopyContent {
+  display: flex;
+  gap: 16px;
   flex: 1;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
 }
 
-.deletebtn {
-  padding: 8px 12px;
+.microCopyKeySection,
+.microCopyValueSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.microCopyKeySection {
+  width: 280px;
+}
+
+.microCopyValueSection {
+  flex: 1;
+}
+
+.microCopyKeySection label,
+.microCopyValueSection label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.microCopyKeyBox {
+  background: #fff7ed;
+  border-radius: 8px;
+  padding: 14px;
+  color: #f97316;
+  font-size: 28px;
+  font-family: monospace;
+}
+
+.microCopyTextarea {
+  min-height: 86px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  padding: 14px;
+  resize: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.microCopyTextarea:focus {
+  outline: none;
+  border-color: #f97316;
+}
+
+.deleteButton {
   border: none;
-  border-radius: 6px;
+  background: transparent;
   cursor: pointer;
+  font-size: 20px;
+  color: #64748b;
+  padding-top: 36px;
 }
 .languageheader {
   display: flex;

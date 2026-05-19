@@ -36,20 +36,20 @@ function LanguagePage() {
   const [showLanguageDetails, setShowLanguageDetails] = useState(false);
 
   useEffect(() => {
-    axios
-      .get<LanguagesData>("/languages.json")
-      .then((response) => {
+    const fetchLanguages = async () => {
+      try {
+        const response = await axios.get<LanguagesData>("/languages.json");
         const data = response.data;
         setLanguagesData(data);
-
         const langs = Object.keys(data);
         if (langs.length > 0) {
           setSelectedLanguage(langs[0]);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log("Error fetching languages:", error);
-      });
+      }
+    };
+    fetchLanguages();
   }, []);
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -17,29 +17,39 @@ function MicroCopyItem({
   onDelete,
 }: Props) {
   return (
-    <div className="micro-item">
-      <div className="micro-key">
-        {microCopyKey}
+    <div className="microCopyCard">
+      <div className="microCopyContent">
+        <div className="microCopyKeySection">
+          <label>KEY</label>
+
+          <div className="microCopyKeyBox">
+            {microCopyKey}
+          </div>
+        </div>
+
+        <div className="microCopyValueSection">
+          <label>VALUE</label>
+
+          <textarea
+            className="microCopyTextarea"
+            value={value}
+            onChange={(e) =>
+              onChange(
+                microCopyKey,
+                e.target.value,
+              )
+            }
+          />
+        </div>
       </div>
 
-      <input
-        className="micro-input"
-        value={value}
-        onChange={(e) =>
-          onChange(
-            microCopyKey,
-            e.target.value,
-          )
-        }
-      />
-
       <button
-        className="deletebtn"
+        className="deleteButton"
         onClick={() =>
           onDelete(microCopyKey)
         }
       >
-        Delete
+        🗑
       </button>
     </div>
   );
