@@ -1,21 +1,28 @@
 type Props = {
   languages: string[];
+  languagesData: any;
   selectedLanguage: string;
-  onSelect: (lang: string) => void;
+  onSelect: (language: string) => void;
 };
 
-function Tabs({ languages, selectedLanguage, onSelect }: Props) {
+function Tabs({ languages, languagesData, selectedLanguage, onSelect }: Props) {
   return (
     <div>
-      {languages.map((lang) => (
-        <button
-          key={lang}
-          className={selectedLanguage === lang ? "active-tab" : "tab"}
-          onClick={() => onSelect(lang)}
-        >
-          {lang}
-        </button>
-      ))}
+      {languages.map((lang) => {
+        const totalKeys = Object.keys(
+          languagesData[lang]?.micro_copies || {},
+        ).length;
+        return (
+          <button
+            key={lang}
+            className={selectedLanguage === lang ? "activeTab" : "tab"}
+            onClick={() => onSelect(lang)}
+          >
+            {lang}
+            <span className="tabBadge">{totalKeys}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }

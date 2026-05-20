@@ -8,6 +8,7 @@ import AddLanguageModal, {
 import "../LanguagePage.css";
 import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
 import MicroCopyItem from "../components/language/MicroCopyItem";
+import { Search, ChevronDown } from "lucide-react";
 
 type Language = {
   name: string;
@@ -181,6 +182,7 @@ function LanguagePage() {
 
     setSelectedLanguage(newLanguage.name);
   };
+  const totalKeys = Object.keys(microCopies || {}).length;
   return (
     <div className="page">
       <Header
@@ -191,6 +193,7 @@ function LanguagePage() {
 
       <Tabs
         languages={languages}
+        languagesData={languagesData}
         selectedLanguage={selectedLanguage}
         onSelect={setSelectedLanguage}
       />
@@ -202,7 +205,10 @@ function LanguagePage() {
             onClick={() => setShowLanguageDetails(!showLanguageDetails)}
           >
             <h3>Language details</h3>
-            <span>{showLanguageDetails ? "⌄" : "›"}</span>
+            <ChevronDown
+              size={20}
+              className={showLanguageDetails ? "chevronOpen" : "chevronClosed"}
+            />
           </div>
 
           {showLanguageDetails && (
@@ -229,15 +235,23 @@ function LanguagePage() {
 
         <div className="microcopybox">
           <div className="microcopyheader">
-            <h3>Micro-copies</h3>
-
+            <div className="microcopyTitle">
+              <h3>Micro-copies</h3>
+              <span className="keyBadge">
+                {totalKeys} keys
+              </span>
+            </div>
             <div className="microcopyactions">
-              <input
-                type="text"
-                placeholder="🔍 Search keys or values..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+              <div className="searchBox">
+                <Search size={18} className="searchIcon" />
+
+                <input
+                  type="text"
+                  placeholder="     Search keys or values..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
 
               <button onClick={() => setShowKeyModal(true)}>
                 + Add micro-copy
