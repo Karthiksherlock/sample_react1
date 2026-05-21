@@ -116,7 +116,13 @@ function LanguagePage() {
   );
 
   const handleAddKey = useCallback(
-    (newKey: string) => {
+    (data: {
+      key: string;
+      value: {
+        [language: string]: string;
+      };
+    }) => {
+      const newKey = data.key;
       if (!newKey.trim()) return;
 
       const exists = microCopies?.[newKey] !== undefined;
@@ -135,11 +141,10 @@ function LanguagePage() {
             micro_copies: {
               ...updatedLanguages[language].micro_copies,
 
-              [newKey]: "",
+              [newKey]: data.value[language] || "",
             },
           };
         });
-
         return updatedLanguages;
       });
     },
@@ -210,12 +215,21 @@ function LanguagePage() {
         onExport={handleExport}
       />
 
-      <Tabs
-        languages={languages}
-        languagesData={languagesData}
-        selectedLanguage={selectedLanguage}
-        onSelect={setSelectedLanguage}
-      />
+      <div className="tabsHeader">
+        <Tabs
+          languages={languages}
+          languagesData={languagesData}
+          selectedLanguage={selectedLanguage}
+          onSelect={setSelectedLanguage}
+        />
+
+        <button
+          className="addMicroCopyTopButton"
+          onClick={() => setShowKeyModal(true)}
+        >
+          + Add Micro-copy
+        </button>
+      </div>
 
       <div className="main">
         <div className="languagebox">
@@ -269,10 +283,6 @@ function LanguagePage() {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-
-              <button onClick={() => setShowKeyModal(true)}>
-                + Add micro-copy
-              </button>
             </div>
           </div>
 
@@ -300,6 +310,7 @@ function LanguagePage() {
         open={showKeyModal}
         onClose={() => setShowKeyModal(false)}
         onSave={handleAddKey}
+        languages={languages}
       />
     </div>
   );
