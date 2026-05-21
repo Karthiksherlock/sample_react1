@@ -123,21 +123,27 @@ function LanguagePage() {
 
       if (exists) return;
 
-      setLanguagesData((prev) => ({
-        ...prev,
+      setLanguagesData((prev) => {
+        const updatedLanguages = {
+          ...prev,
+        };
 
-        [selectedLanguage]: {
-          ...prev[selectedLanguage],
+        Object.keys(updatedLanguages).forEach((language) => {
+          updatedLanguages[language] = {
+            ...updatedLanguages[language],
 
-          micro_copies: {
-            ...prev[selectedLanguage].micro_copies,
+            micro_copies: {
+              ...updatedLanguages[language].micro_copies,
 
-            [newKey]: "",
-          },
-        },
-      }));
+              [newKey]: "",
+            },
+          };
+        });
+
+        return updatedLanguages;
+      });
     },
-    [microCopies, selectedLanguage],
+    [microCopies],
   );
   const handleSave = () => {
     console.log("Saving:", languagesData);
@@ -169,6 +175,19 @@ function LanguagePage() {
     const exists = languagesData[newLanguage.name] !== undefined;
 
     if (exists) return;
+    const firstLanguage = Object.keys(languagesData)[0];
+
+    const existingKeys = languagesData[firstLanguage]?.micro_copies || {};
+
+    const emptyMicroCopies = Object.keys(existingKeys).reduce(
+      (acc, key) => {
+        acc[key] = "";
+        return acc;
+      },
+      {} as {
+        [key: string]: string;
+      },
+    );
 
     setLanguagesData((prev) => ({
       ...prev,
@@ -176,7 +195,7 @@ function LanguagePage() {
       [newLanguage.name]: {
         ...newLanguage,
 
-        micro_copies: {},
+        micro_copies: emptyMicroCopies,
       },
     }));
 
@@ -237,9 +256,7 @@ function LanguagePage() {
           <div className="microcopyheader">
             <div className="microcopyTitle">
               <h3>Micro-copies</h3>
-              <span className="keyBadge">
-                {totalKeys} keys
-              </span>
+              <span className="keyBadge">{totalKeys} keys</span>
             </div>
             <div className="microcopyactions">
               <div className="searchBox">
