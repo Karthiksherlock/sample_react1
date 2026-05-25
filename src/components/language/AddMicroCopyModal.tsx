@@ -9,6 +9,7 @@ type Props = {
 
 function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
   const [key, setKey] = useState("");
+  const [error, setError] = useState("");
 
   const [values, setValues] = useState<{
     [language: string]: string;
@@ -22,10 +23,24 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
   }, [open]);
 
   if (!open) return null;
-
+  const keyRegex = /^[a-zA-Z0-9_-]+$/;
   const handleSave = () => {
-    if (!key.trim()) return;
-    onSave({ key: key.trim(), value: values });
+    const trimmedKey = key.trim();
+
+    if (!trimmedKey) {
+      setError("Key is required");
+      return;
+    }
+
+    if (!keyRegex.test(trimmedKey)) {
+      setError(
+        "Only letters, numbers, underscores (_) and hyphens (-) are allowed",
+      );
+      return;
+    }
+
+    setError("");
+    onSave({ key: trimmedKey, value: values});
     setKey("");
     setValues({});
     onClose();
@@ -48,8 +63,9 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
         ref={inputRef}
         placeholder="Micro-copy key"
         value={key}
-        onChange={(e) => setKey(e.target.value)}
+        onChange={(e) => {setKey(e.target.value);setError("");}}
       />
+      {error && <p className="KeyErrorText">{error}</p>}
       <div className="languageValuesContainer">
         {languages.map((language) => (
           <div

@@ -307,3 +307,9 @@ body {
 .addMicroCopyTopButton:hover {
   background: #ea580c;
 }
+.keyErrorText {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 6px;
+  font-weight: 500;
+}
