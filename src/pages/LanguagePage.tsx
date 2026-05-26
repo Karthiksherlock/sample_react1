@@ -5,7 +5,7 @@ import Tabs from "../components/language/Tabs";
 import AddLanguageModal, {
   type NewLanguage,
 } from "../components/language/AddLanguageModal";
-import "../LanguagePage.css";
+import "../App.css";
 import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
 import MicroCopyItem from "../components/language/MicroCopyItem";
 import { Search, ChevronDown } from "lucide-react";
@@ -36,34 +36,11 @@ function LanguagePage() {
   const [showKeyModal, setShowKeyModal] = useState(false);
   const [showLanguageDetails, setShowLanguageDetails] = useState(false);
 
-  useEffect(() => {
-    const fetchLanguages = async () => {
-      try {
-        const response = await axios.get<LanguagesData>("/languages.json");
-        const data = response.data;
-        setLanguagesData(data);
-        const langs = Object.keys(data);
-        if (langs.length > 0) {
-          setSelectedLanguage(langs[0]);
-        }
-      } catch (error) {
-        console.log("Error fetching languages:", error);
-      }
-    };
-    fetchLanguages();
-  }, []);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [search]);
-
   const languages = Object.keys(languagesData);
-
   const microCopies = languagesData[selectedLanguage]?.micro_copies;
   const selectedLanguageData = languagesData[selectedLanguage];
+  const totalKeys = Object.keys(microCopies || {}).length;
+
   const filteredMicroCopies = useMemo(() => {
     return Object.entries(microCopies || {}).filter(([key, value]) => {
       return (
@@ -92,30 +69,28 @@ function LanguagePage() {
     [selectedLanguage],
   );
 
-  const handleDeleteKey = useCallback(
-    (keyToDelete: string) => {
-      setLanguagesData((prev) => {
+  const handleDeleteMicroCopyKey = useCallback((keyToDelete: string) => {
+    setLanguagesData((prev) => {
+      const updatedLanguages = {
+        ...prev,
+      };
+      Object.keys(updatedLanguages).forEach((language) => {
         const updatedMicroCopies = {
-          ...prev[selectedLanguage].micro_copies,
+          ...updatedLanguages[language].micro_copies,
         };
-
         delete updatedMicroCopies[keyToDelete];
 
-        return {
-          ...prev,
+        updatedLanguages[language] = {
+          ...updatedLanguages[language],
 
-          [selectedLanguage]: {
-            ...prev[selectedLanguage],
-
-            micro_copies: updatedMicroCopies,
-          },
+          micro_copies: updatedMicroCopies,
         };
       });
-    },
-    [selectedLanguage],
-  );
+      return updatedLanguages;
+    });
+  }, []);
 
-  const handleAddKey = useCallback(
+  const handleAddMicroCopyKey = useCallback(
     (data: {
       key: string;
       value: {
@@ -206,7 +181,30 @@ function LanguagePage() {
 
     setSelectedLanguage(newLanguage.name);
   };
-  const totalKeys = Object.keys(microCopies || {}).length;
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        const response = await axios.get<LanguagesData>("/languages.json");
+        const data = response.data;
+        setLanguagesData(data);
+        const langs = Object.keys(data);
+        if (langs.length > 0) {
+          setSelectedLanguage(langs[0]);
+        }
+      } catch (error) {
+        console.log("Error fetching languages:", error);
+      }
+    };
+    fetchLanguages();
+  }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
   return (
     <div className="page">
       <Header
@@ -293,7 +291,7 @@ function LanguagePage() {
                 microCopyKey={key}
                 value={value}
                 onChange={handleValueChange}
-                onDelete={handleDeleteKey}
+                onDelete={handleDeleteMicroCopyKey}
               />
             ))}
           </div>
@@ -309,7 +307,7 @@ function LanguagePage() {
       <AddMicroCopyModal
         open={showKeyModal}
         onClose={() => setShowKeyModal(false)}
-        onSave={handleAddKey}
+        onSave={handleAddMicroCopyKey}
         languages={languages}
       />
     </div>
