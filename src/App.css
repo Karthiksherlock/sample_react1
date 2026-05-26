@@ -108,7 +108,7 @@ body {
 }
 .tabBadge {
   margin-left: 8px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(251, 248, 248, 0.25);
   padding: 2px 8px;
   border-radius: 999px;
   font-size: 12px;
@@ -312,4 +312,55 @@ body {
   font-size: 13px;
   margin-top: 6px;
   font-weight: 500;
+}
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1000;
+}
+
+.modalCard {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 640px;
+
+  padding: 24px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  margin-top: 24px;
+}
+.primaryButton {
+  background: #f97316;
+  color: white;
+}
+
+.secondaryButton {
+  background: #f3f4f6;
+  color: #111827;
 }

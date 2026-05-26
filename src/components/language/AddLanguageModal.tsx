@@ -55,43 +55,64 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
   };
 
   return (
-    <div>
-      <h3>Add Language</h3>
+    <div className="modalOverlay">
+      <div className="modalCard">
+        <div className="modalHeader">
+          <h2>Add a new Language</h2>
+          <button className="secondaryButton" onClick={onClose}>
+            x
+          </button>
+        </div>
+        <div className="modalBody">
+          <div className="formGroup">
+            <label>Language Name</label>
+            <input
+              ref={inputRef}
+              placeholder="Language Name"
+              value={formData.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+            />
+          </div>
+          <div className="formGroup">
+            <label>IANA Code</label>
+            <input
+              placeholder="IANA Code"
+              value={formData.iana_code}
+              onChange={(e) => handleChange("iana_code", e.target.value)}
+            />
+          </div>
+          <div className="formGroup">
+            <label>ISO Code</label>
+            <input
+              placeholder="ISO Code"
+              value={formData.iso_code}
+              onChange={(e) => handleChange("iso_code", e.target.value)}
+            />
+          </div>
+          <div className="formGroup">
+            <label>Font Family</label>
+            <input
+              placeholder="Font Family"
+              value={formData.font_family}
+              onChange={(e) => handleChange("font_family", e.target.value)}
+            />
+          </div>
+          <div className="formGroup">
+            <label>Font URL</label>
+            <input
+              placeholder="Font URL"
+              value={formData.font_url}
+              onChange={(e) => handleChange("font_url", e.target.value)}
+            />
+          </div>
+        </div>
 
-      <input
-        ref={inputRef}
-        placeholder="Language Name"
-        value={formData.name}
-        onChange={(e) => handleChange("name", e.target.value)}
-      />
-
-      <input
-        placeholder="IANA Code"
-        value={formData.iana_code}
-        onChange={(e) => handleChange("iana_code", e.target.value)}
-      />
-
-      <input
-        placeholder="ISO Code"
-        value={formData.iso_code}
-        onChange={(e) => handleChange("iso_code", e.target.value)}
-      />
-
-      <input
-        placeholder="Font Family"
-        value={formData.font_family}
-        onChange={(e) => handleChange("font_family", e.target.value)}
-      />
-
-      <input
-        placeholder="Font URL"
-        value={formData.font_url}
-        onChange={(e) => handleChange("font_url", e.target.value)}
-      />
-
-      <button onClick={handleSave}>Save</button>
-
-      <button onClick={onClose}>Cancel</button>
+        <div className="modalFooter">
+          <button className="primaryButton" onClick={handleSave}>
+            Save
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
