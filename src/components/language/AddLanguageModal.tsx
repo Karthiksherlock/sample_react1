@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import { X } from "lucide-react";
 export type NewLanguage = {
   name: string;
   iana_code: string;
@@ -59,8 +59,8 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
       <div className="modalCard">
         <div className="modalHeader">
           <h2>Add a new Language</h2>
-          <button className="secondaryButton" onClick={onClose}>
-            x
+          <button className="modalCloseButton" onClick={onClose}>
+            <X size={20} />
           </button>
         </div>
         <div className="modalBody">
@@ -68,7 +68,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
             <label>Language Name</label>
             <input
               ref={inputRef}
-              placeholder="Language Name"
+              placeholder="e.g French"
               value={formData.name}
               onChange={(e) => handleChange("name", e.target.value)}
             />
@@ -76,7 +76,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
           <div className="formGroup">
             <label>IANA Code</label>
             <input
-              placeholder="IANA Code"
+              placeholder="e.g. fr-FR"
               value={formData.iana_code}
               onChange={(e) => handleChange("iana_code", e.target.value)}
             />
@@ -84,7 +84,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
           <div className="formGroup">
             <label>ISO Code</label>
             <input
-              placeholder="ISO Code"
+              placeholder="e.g. fr"
               value={formData.iso_code}
               onChange={(e) => handleChange("iso_code", e.target.value)}
             />
@@ -92,7 +92,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
           <div className="formGroup">
             <label>Font Family</label>
             <input
-              placeholder="Font Family"
+              placeholder="e.g. Arial"
               value={formData.font_family}
               onChange={(e) => handleChange("font_family", e.target.value)}
             />
@@ -100,7 +100,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
           <div className="formGroup">
             <label>Font URL</label>
             <input
-              placeholder="Font URL"
+              placeholder="e.g. https://fonts.googleapis.com/css2?family=Roboto&display=swap"
               value={formData.font_url}
               onChange={(e) => handleChange("font_url", e.target.value)}
             />
@@ -108,8 +108,11 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
         </div>
 
         <div className="modalFooter">
+          <button className="secondaryButton" onClick={onClose}>
+            cancel
+          </button>
           <button className="primaryButton" onClick={handleSave}>
-            Save
+            Create Language
           </button>
         </div>
       </div>

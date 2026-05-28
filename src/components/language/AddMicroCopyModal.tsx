@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-
+import { X } from "lucide-react";
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSave: ( data: { key: string; value: { [language: string]: string } } ) => void;
+  onSave: (data: {
+    key: string;
+    value: { [language: string]: string };
+  }) => void;
   languages: string[];
 };
 
@@ -40,15 +43,12 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
     }
 
     setError("");
-    onSave({ key: trimmedKey, value: values});
+    onSave({ key: trimmedKey, value: values });
     setKey("");
     setValues({});
     onClose();
   };
-  const handleValueChange = (
-    language: string,
-    value: string,
-  ) => {
+  const handleValueChange = (language: string, value: string) => {
     setValues((prev) => ({
       ...prev,
       [language]: value,
@@ -56,39 +56,54 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
   };
 
   return (
-    <div>
-      <h3>Add Micro-copy</h3>
-
-      <input
-        ref={inputRef}
-        placeholder="Micro-copy key"
-        value={key}
-        onChange={(e) => {setKey(e.target.value);setError("");}}
-      />
-      {error && <p className="KeyErrorText">{error}</p>}
-      <div className="languageValuesContainer">
-        {languages.map((language) => (
-          <div
-            key={language}
-            className="languageValueItem"
-          >
-            <label>{language}</label>
-
+  <div className="modalOverlay">
+    <div className="modalCard addMicroCopyModalCard">
+        <div className="modalHeader">
+          <h2>Add a new Micro-copy</h2>
+          <button className="modalCloseButton" onClick={onClose}>
+            <X size={20} />
+          </button>
+        </div>
+        <div className="modalBody">
+          <div className="formGroup">
+            <label>Enter micro-copy key</label>
             <input
-              placeholder={`Value for ${language}`}
-              value={values[language] || ""}
-              onChange={(e) =>
-                handleValueChange(
-                  language,
-                  e.target.value,
-                )
-              }
+              ref={inputRef}
+              placeholder=" e.g. WelcomeText"
+              value={key}
+              onChange={(e) => {
+                setKey(e.target.value);
+                setError("");
+              }}
             />
           </div>
-        ))}
+          {error && <p className="KeyErrorText">{error}</p>}
+          <h3 className="sectionTitle">Translation Values</h3>
+          <div className="languageValuesContainer scrollableValues">
+            {languages.map((language) => (
+              <div key={language} className="languageValueItem">
+                <label>{language}</label>
+                <textarea
+                  placeholder={`Value for ${language}`}
+                  value={values[language] || ""}
+                  onChange={(e) =>
+                    handleValueChange(language, e.target.value)
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="modalFooter">
+          <button className="secondaryButton" onClick={onClose}>
+            Cancel
+          </button>
+
+          <button className="primaryButton" onClick={handleSave}>
+            Save
+          </button>
+        </div>
       </div>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={onClose}>Cancel</button>
     </div>
   );
 }
