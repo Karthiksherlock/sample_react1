@@ -1,3 +1,4 @@
+import { Trash2 } from "lucide-react";
 type Props = {
   microCopyKey: string;
   value: string;
@@ -29,7 +30,7 @@ function MicroCopyItem({ microCopyKey, value, onChange, onDelete }: Props) {
       </div>
 
       <button className="deleteButton" onClick={() => onDelete(microCopyKey)}>
-        🗑
+        <Trash2 />
       </button>
     </div>
   );

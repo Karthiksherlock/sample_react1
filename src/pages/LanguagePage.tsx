@@ -151,6 +151,8 @@ function LanguagePage() {
 
   const handleAddLanguage = (newLanguage: NewLanguage) => {
     if (!newLanguage.name.trim()) return;
+    if (!newLanguage.iana_code.trim()) return;
+    if (!newLanguage.iso_code.trim()) return;
 
     const exists = languagesData[newLanguage.name] !== undefined;
 

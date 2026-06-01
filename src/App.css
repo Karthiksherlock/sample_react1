@@ -6,7 +6,7 @@ body {
 
 .page {
   max-width: 1160px;
-  margin: 0 auto;
+  margin: auto;
   padding: 32px;
 }
 .header {
@@ -316,15 +316,13 @@ body {
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.45);
+  background: rgba(0, 0, 0, 0.77);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   z-index: 1000;
-
-  backdrop-filter: blur(4px);
 }
 
 .modalCard {
@@ -347,7 +345,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  padding-bottom: 4px;
   margin-bottom: 24px;
 }
 
@@ -368,9 +366,19 @@ body {
 
   cursor: pointer;
 
-  font-size: 28px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
 
+  font-size: 24px;
   color: #6b7280;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalCloseButton:hover {
+  background: #f3f4f6;
 }
 .formGroup {
   display: flex;
@@ -412,14 +420,23 @@ body {
   font-weight: 700;
   color: #111827;
 
-  margin-top: 8px;
+  margin-top: 4px;
+  margin-bottom: -4px;
 }
 .scrollableValues {
   max-height: 320px;
 
   overflow-y: auto;
 
-  padding-right: 6px;
+  padding-right: 10px;
+}
+.scrollableValues::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollableValues::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
 }
 .languageValuesContainer {
   max-height: 340px;
@@ -427,13 +444,13 @@ body {
   padding-right: 6px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
 }
 .languageValueItem {
   display: flex;
   flex-direction: column;
 
-  gap: 8px;
+  gap: 2px;
 
   margin-bottom: 20px;
 }
@@ -445,7 +462,7 @@ body {
   color: #374151;
 }
 .languageValueItem textarea {
-  min-height: 100px;
+  min-height: 110px;
 
   resize: vertical;
   border: 1px solid #dbe2ea;
@@ -478,10 +495,11 @@ body {
 .modalFooter {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 
   gap: 12px;
 
-  margin-top: 28px;
+  margin-top: 32px;
 }
 .primaryButton {
   background: #f97316;
@@ -516,4 +534,13 @@ body {
 
 .secondaryButton:hover {
   background: #e5e7eb;
+}
+.fieldErrorText {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 2px 0 0;
+}
+.requiredMark {
+  color: #dc2626;
 }
