@@ -5,9 +5,11 @@ body {
 }
 
 .page {
-  max-width: 1160px;
-  margin: auto;
-  padding: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-left: 150px;
+  padding-right: 150px;
 }
 .header {
   display: flex;
@@ -18,12 +20,17 @@ body {
 
 .header h2 {
   margin: 0;
-  font-size: 24px;
+  justify-self: flex-start;
+  font-size: 28px;
+  line-height: 40px;
+  font-weight: 700;
+  color: #111827;
 }
 
 .header p {
-  margin-top: 5px;
-  color: gray;
+  margin-top: 2px;
+  color: #64748b;
+  font-size: 15px;
 }
 
 .headeractions {
@@ -32,9 +39,9 @@ body {
 }
 
 .headeractions button {
-  height: 48px;
-  padding: 0 22px;
-  border-radius: 10px;
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 12px;
   border: 1px solid #e2e8f0;
   background: white;
   cursor: pointer;
@@ -54,9 +61,9 @@ body {
 }
 
 .logoBox {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
   background: #f97316;
   display: flex;
   align-items: center;
@@ -71,12 +78,14 @@ body {
 }
 .searchBox {
   position: relative;
+  width: 340px;
 }
 
 .searchIcon {
   position: absolute;
   left: 14px;
-  top: 18px;
+  top: 50%;
+  transform: translateY(-50%);
   color: #94a3b8;
 }
 
@@ -103,15 +112,33 @@ body {
   color: #f97316;
   padding: 6px 12px;
   border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
 }
 .tabBadge {
-  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 24px;
+  height: 20px;
+
+  margin-left: 6px;
   background: rgba(251, 248, 248, 0.25);
   padding: 2px 8px;
   border-radius: 999px;
   font-size: 12px;
+}
+.tabsContainer {
+  display: inline-flex;
+  gap: 4px;
+
+  background: #fff;
+  border: 1px solid #edf2f7;
+
+  padding: 6px;
+
+  border-radius: 12px;
 }
 
 .main {
@@ -123,9 +150,9 @@ body {
 .languagebox,
 .microcopybox {
   background: white;
-  border-radius: 10px;
-  padding: 20px;
   border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 28px;
 }
 
 .microcopyheader {
@@ -134,9 +161,12 @@ body {
   align-items: center;
   margin-bottom: 20px;
 }
+.languageheader h3,
 .microcopyheader h3 {
-  font-size: 34px;
   margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
 }
 
 .microcopyactions {
@@ -145,11 +175,11 @@ body {
 }
 
 .microcopyactions input {
-  width: 320px;
-  height: 46px;
+  width: 100%;
+  height: 44px;
+  border: 1px solid #d7dde6;
   border-radius: 10px;
-  border: 1px solid #dbe2ea;
-  padding: 0 16px;
+  padding-left: 42px;
   font-size: 15px;
 }
 
@@ -163,11 +193,23 @@ body {
 .list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+}
+.emptyState {
+  padding: 48px 24px;
+  text-align: center;
+
+  color: #94a3b8;
+
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .tab,
 .activeTab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   border: none;
   border-radius: 10px;
   padding: 10px 18px;
@@ -176,18 +218,34 @@ body {
   color: #64748b;
   font-weight: 600;
 }
-
+.tab {
+  height: 40px;
+  color: #64748b;
+}
+.tab:hover {
+  background: #f8fafc;
+}
 .activeTab {
-  background: #f97316;
+  height: 40px;
+
+  background: #ff7a1a;
+
+  border-radius: 10px;
+
   color: white;
+
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
 }
 .microCopyCard {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 18px;
+
   border: 1px solid #dbe2ea;
-  border-radius: 12px;
+  border-radius: 18px;
+  min-height: 180px;
+  padding: 24px;
   background: white;
 }
 
@@ -204,7 +262,7 @@ body {
 }
 
 .microCopyKeySection {
-  width: 280px;
+  width: 310px;
 }
 
 .microCopyValueSection {
@@ -223,14 +281,15 @@ body {
 .microCopyKeyBox {
   background: #fff7ed;
   border-radius: 8px;
-  padding: 14px;
+  padding: 16px;
   color: #f97316;
-  font-size: 28px;
+  line-height: 24px;
   font-family: monospace;
+  font-weight: 500;
 }
 
 .microCopyTextarea {
-  min-height: 86px;
+  min-height: 120px;
   border: 1px solid #dbe2ea;
   border-radius: 8px;
   padding: 14px;
@@ -250,7 +309,10 @@ body {
   cursor: pointer;
   font-size: 20px;
   color: #64748b;
-  padding-top: 36px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .languageheader {
   display: flex;
@@ -274,14 +336,17 @@ body {
 
 .detailitem label {
   display: block;
-  font-size: 12px;
-  color: #777;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
   margin-bottom: 4px;
 }
 
 .detailitem p {
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   color: #222;
   word-break: break-word;
 }
@@ -316,7 +381,7 @@ body {
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.77);
+  background: rgba(15, 23, 42, 0.55);
 
   display: flex;
   align-items: center;
@@ -329,16 +394,27 @@ body {
   background: white;
   border-radius: 24px;
 
-  width: 100%;
-  max-width: 520px;
+  width: min(92vw, 520px);
   margin: 20px;
-  padding: 28px;
+  padding: 32px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  animation: modalEnter 0.2s ease;
+}
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 .addMicroCopyModalCard {
-  max-width: 760px;
+  width: min(92vw, 760px);
 }
 
 .modalHeader {
@@ -346,10 +422,12 @@ body {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 4px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .modalHeader h2 {
+  line-height: 1.2;
+  letter-spacing: -0.5px;
   font-size: 28px;
   font-weight: 700;
   color: #111827;
@@ -357,7 +435,7 @@ body {
 .modalBody {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .modalCloseButton {
@@ -368,11 +446,10 @@ body {
 
   width: 36px;
   height: 36px;
-  border-radius: 999px;
+  border-radius: 8px;
 
   font-size: 24px;
   color: #6b7280;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -387,7 +464,7 @@ body {
 }
 
 .formGroup label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
 
   color: #475569;
@@ -395,8 +472,11 @@ body {
 
 .formGroup input,
 .formGroup textarea {
+  color: #111827;
+  line-height: 1.5;
   border: 1px solid #dbe2ea;
   border-radius: 14px;
+  height: 52px;
 
   padding: 14px 16px;
 
@@ -408,13 +488,21 @@ body {
 
   box-sizing: border-box;
 }
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #94a3b8;
+}
 .formGroup input:focus,
 .formGroup textarea:focus {
   border-color: #f97316;
 
   box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
 }
-
+.sectionDivider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 4px 0;
+}
 .sectionTitle {
   font-size: 18px;
   font-weight: 700;
@@ -449,6 +537,8 @@ body {
 .languageValueItem {
   display: flex;
   flex-direction: column;
+  min-height: 120px;
+  line-height: 1.5;
 
   gap: 2px;
 
@@ -475,7 +565,10 @@ body {
 
   outline: none;
 
-  transition: all 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 
   box-sizing: border-box;
 }
@@ -513,6 +606,8 @@ body {
   font-weight: 600;
 
   cursor: pointer;
+  height: 48px;
+  min-width: 110px;
 }
 
 .secondaryButton {
@@ -526,10 +621,11 @@ body {
   font-weight: 600;
 
   cursor: pointer;
+  height: 48px;
+  min-width: 110px;
 }
 .primaryButton:hover {
   opacity: 0.92;
-  background: #f97316;
 }
 
 .secondaryButton:hover {

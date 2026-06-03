@@ -78,6 +78,7 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
             />
           </div>
           {error && <p className="KeyErrorText">{error}</p>}
+          <div className="sectionDivider" />
           <h3 className="sectionTitle">Translation Values</h3>
           <div className="languageValuesContainer scrollableValues">
             {languages.map((language) => (

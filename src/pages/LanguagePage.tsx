@@ -278,7 +278,7 @@ function LanguagePage() {
 
                 <input
                   type="text"
-                  placeholder="     Search keys or values..."
+                  placeholder="      Search keys or values..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -287,16 +287,24 @@ function LanguagePage() {
           </div>
 
           <div className="list">
-            {filteredMicroCopies.map(([key, value]) => (
-              <MicroCopyItem
-                key={key}
-                microCopyKey={key}
-                value={value}
-                onChange={handleValueChange}
-                onDelete={handleDeleteMicroCopyKey}
-              />
-            ))}
-          </div>
+            {filteredMicroCopies.length === 0 ? (
+              <div className="emptyState">
+                No micro-copies found for "{debouncedSearch}"
+                <br />
+                Click "Add Micro-copy" to create one.
+              </div>
+            ) : (
+              filteredMicroCopies.map(([key, value]) => (
+                <MicroCopyItem
+                  key={key}
+                  microCopyKey={key}
+                  value={value}
+                  onChange={handleValueChange}
+                  onDelete={handleDeleteMicroCopyKey}
+                />
+            ))
+          )}
+        </div>
         </div>
       </div>
 
