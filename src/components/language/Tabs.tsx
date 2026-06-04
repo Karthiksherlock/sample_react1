@@ -1,4 +1,5 @@
 import { Globe } from "lucide-react";
+import "./Tabs.css";
 type Props = {
   languages: string[];
   languagesData: any;

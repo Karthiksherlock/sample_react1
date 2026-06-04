@@ -5,10 +5,10 @@ import Tabs from "../components/language/Tabs";
 import AddLanguageModal, {
   type NewLanguage,
 } from "../components/language/AddLanguageModal";
-import "../App.css";
 import AddMicroCopyModal from "../components/language/AddMicroCopyModal";
 import MicroCopyItem from "../components/language/MicroCopyItem";
 import { Search, ChevronDown } from "lucide-react";
+import "./LanguagePage.css";
 
 type Language = {
   name: string;
@@ -289,7 +289,7 @@ function LanguagePage() {
           <div className="list">
             {filteredMicroCopies.length === 0 ? (
               <div className="emptyState">
-                No micro-copies found for "{debouncedSearch}"
+                No keys match your search "{debouncedSearch}"
                 <br />
                 Click "Add Micro-copy" to create one.
               </div>
@@ -302,9 +302,9 @@ function LanguagePage() {
                   onChange={handleValueChange}
                   onDelete={handleDeleteMicroCopyKey}
                 />
-            ))
-          )}
-        </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
 

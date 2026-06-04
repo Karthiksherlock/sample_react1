@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
+import "./AddMicroCopyModal.css";
 type Props = {
   open: boolean;
   onClose: () => void;
@@ -56,8 +57,8 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
   };
 
   return (
-  <div className="modalOverlay">
-    <div className="modalCard addMicroCopyModalCard">
+    <div className="modalOverlay">
+      <div className="modalCard addMicroCopyModalCard">
         <div className="modalHeader">
           <h2>Add a new Micro-copy</h2>
           <button className="modalCloseButton" onClick={onClose}>
@@ -87,9 +88,7 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
                 <textarea
                   placeholder={`Value for ${language}`}
                   value={values[language] || ""}
-                  onChange={(e) =>
-                    handleValueChange(language, e.target.value)
-                  }
+                  onChange={(e) => handleValueChange(language, e.target.value)}
                 />
               </div>
             ))}

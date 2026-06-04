@@ -1,4 +1,5 @@
 import { Trash2 } from "lucide-react";
+import "./MicroCopyItem.css";
 type Props = {
   microCopyKey: string;
   value: string;

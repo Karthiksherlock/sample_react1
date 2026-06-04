@@ -1,4 +1,5 @@
 import { Download,Save,Plus,Languages} from "lucide-react";
+import "./Header.css";
 
 type Props = {
   onAddLanguage: () => void;

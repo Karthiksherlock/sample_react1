@@ -1,0 +1,89 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+body {
+  margin: 0;
+  background-color: #f5f7fb;
+  font-family: Arial, sans-serif;
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+.chevronOpen {
+  transform: rotate(0deg);
+  transition: 0.2s;
+}
+
+.chevronClosed {
+  transform: rotate(-90deg);
+  transition: 0.2s;
+}
+.languageheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.languageheader h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.languagedetails {
+  margin-top: 20px;
+}
+
+.detailitem {
+  margin-bottom: 16px;
+}
+
+.detailitem label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.detailitem p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #222;
+  word-break: break-word;
+}
+.addMicroCopyTopButton {
+  border: none;
+  background: #f97316;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addMicroCopyTopButton:hover {
+  background: #ea580c;
+}
+.languagebox {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 28px;
+}
+.languageheader h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
