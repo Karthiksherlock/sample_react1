@@ -1,4 +1,4 @@
-.modalOverlay {
+.microCopyModalOverlay {
   position: fixed;
   inset: 0;
   background: rgba(15, 23, 42, 0.55);
@@ -10,7 +10,7 @@
   z-index: 1000;
 }
 
-.modalCard {
+.microCopyModalCard {
   background: white;
   border-radius: 24px;
 
@@ -22,19 +22,7 @@
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
   animation: modalEnter 0.2s ease;
 }
-@keyframes modalEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.modalHeader {
+.microCopyModalHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -42,20 +30,14 @@
   margin-bottom: 28px;
 }
 
-.modalHeader h2 {
+.microCopyModalHeader h2 {
   line-height: 1.2;
   letter-spacing: -0.5px;
   font-size: 28px;
   font-weight: 700;
   color: #111827;
 }
-.modalBody {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.modalCloseButton {
+.microCopyCloseButton {
   border: none;
   background: transparent;
 
@@ -71,71 +53,192 @@
   align-items: center;
   justify-content: center;
 }
-.modalCloseButton:hover {
+.microCopyCloseButton:hover {
   background: #f3f4f6;
 }
-.addMicroCopyModalCard {
-  width: min(92vw, 760px);
+@keyframes microCopyModalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.microcopyTitle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.microcopybox {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 18px;
-  padding: 28px;
-}
-
-.microcopyheader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.microcopyheader h3 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-  color: #111827;
-}
-
-.microcopyactions {
-  display: flex;
-  gap: 10px;
-}
-
-.microcopyactions input {
-  width: 100%;
-  height: 44px;
-  border: 1px solid #d7dde6;
-  border-radius: 10px;
-  padding-left: 42px;
-  font-size: 15px;
-}
-
-.microcopyactions button {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.list {
+.microCopyModalBody {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
-.emptyState {
-  padding: 48px 24px;
-  text-align: center;
 
-  color: #94a3b8;
+.microCopyFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.microCopyFormGroup label {
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #475569;
+}
+
+.microCopyFormGroup input,
+.microCopyFormGroup textarea {
+  color: #111827;
+  line-height: 1.5;
+  border: 1px solid #dbe2ea;
+  border-radius: 14px;
+  height: 52px;
+
+  padding: 14px 16px;
 
   font-size: 15px;
+
+  outline: none;
+  width: 100%;
+  transition: all 0.2s ease;
+
+  box-sizing: border-box;
+}
+.microCopyFormGroup input::placeholder,
+.microCopyFormGroup textarea::placeholder {
+  color: #94a3b8;
+}
+.microCopyFormGroup input:focus,
+.microCopyFormGroup textarea:focus {
+  border-color: #f97316;
+
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+}
+.keyErrorText {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 6px;
   font-weight: 500;
+}
+.sectionDivider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 4px 0;
+}
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+
+  margin-top: 4px;
+  margin-bottom: -4px;
+}
+
+.languageValuesContainer {
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.languageValueItem {
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+  line-height: 1.5;
+
+  gap: 2px;
+
+  margin-bottom: 20px;
+}
+
+.languageValueItem label {
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #374151;
+}
+.languageValueItem textarea {
+  min-height: 110px;
+
+  resize: vertical;
+  border: 1px solid #dbe2ea;
+  border-radius: 14px;
+
+  padding: 14px 16px;
+
+  font-size: 15px;
+  font-family: inherit;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  box-sizing: border-box;
+}
+.languageValueItem textarea:focus {
+  border-color: #f97316;
+
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+}
+
+
+
+.microCopyPrimaryButton {
+  background: #f97316;
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+
+  padding: 12px 22px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+  height: 48px;
+  min-width: 110px;
+}
+
+.microCopySecondaryButton {
+  background: #f3f4f6;
+
+  border: none;
+  border-radius: 12px;
+
+  padding: 12px 22px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+  height: 48px;
+  min-width: 110px;
+}
+.microCopyPrimaryButton:hover {
+  opacity: 0.92;
+}
+
+.microCopySecondaryButton:hover {
+  background: #e5e7eb;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.addMicroCopyModalCard {
+  width: min(92vw, 760px);
 }

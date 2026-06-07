@@ -20,7 +20,7 @@ function Tabs({ languages, languagesData, selectedLanguage, onSelect }: Props) {
             className={selectedLanguage === lang ? "activeTab" : "tab"}
             onClick={() => onSelect(lang)}
           >
-            <Globe size={18} className="globeIcon"/>
+            <Globe size={18}/>
             {lang}
             <span className="tabBadge">{totalKeys}</span>
           </button>

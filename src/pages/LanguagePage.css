@@ -1,21 +1,85 @@
+.page,
+.page * {
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    sans-serif;
+}
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.tabsHeader {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.addMicroCopyTopButton {
+  height: 40px;
+
+  padding: 0 16px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #f97316;
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.addMicroCopyTopButton:hover {
+  background: #ea580c;
+}
+
 .main {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-body {
-  margin: 0;
-  background-color: #f5f7fb;
-  font-family: Arial, sans-serif;
+
+.languagebox {
+  background: white;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 16px;
+
+  padding: 24px;
 }
 
-.page {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-top: 30px;
-  padding-left: 150px;
-  padding-right: 150px;
+.languageheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
 }
+.languageheader h3 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  color: #0f172a;
+}
+
 .chevronOpen {
   transform: rotate(0deg);
   transition: 0.2s;
@@ -25,65 +89,122 @@ body {
   transform: rotate(-90deg);
   transition: 0.2s;
 }
-.languageheader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-
-.languageheader h3 {
-  margin: 0;
-  font-size: 18px;
-}
 
 .languagedetails {
-  margin-top: 20px;
-}
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-.detailitem {
-  margin-bottom: 16px;
+  gap: 24px 40px;
+
+  margin-top: 24px;
 }
 
 .detailitem label {
   display: block;
-  font-size: 13px;
+
+  font-size: 12px;
   font-weight: 600;
+
   color: #64748b;
+
   text-transform: uppercase;
-  margin-bottom: 4px;
+
+  margin-bottom: 6px;
 }
 
 .detailitem p {
   margin: 0;
-  font-size: 15px;
-  font-weight: 500;
-  color: #222;
-  word-break: break-word;
-}
-.addMicroCopyTopButton {
-  border: none;
-  background: #f97316;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 10px;
+
   font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
+  line-height: 20px;
+
+  color: #0f172a;
 }
 
-.addMicroCopyTopButton:hover {
-  background: #ea580c;
-}
-.languagebox {
+.microcopybox {
   background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 18px;
-  padding: 28px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  padding: 24px;
 }
-.languageheader h3 {
+
+.microcopyheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.microcopyheader h3 {
   margin: 0;
   font-size: 20px;
   font-weight: 700;
   color: #111827;
+}
+.microcopyTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.keyBadge {
+  background: #fff7ed;
+  color: #f97316;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.microcopyactions {
+  display: flex;
+  gap: 10px;
+}
+
+.microcopyactions input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #d7dde6;
+  border-radius: 10px;
+  padding-left: 42px;
+  font-size: 15px;
+}
+
+.microcopyactions button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.searchBox {
+  position: relative;
+  width: 300px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.searchBox input {
+  padding-left: 42px;
+  height: 48px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.emptyState {
+  padding: 48px 24px;
+  text-align: center;
+
+  color: #94a3b8;
+
+  font-size: 15px;
+  font-weight: 500;
 }

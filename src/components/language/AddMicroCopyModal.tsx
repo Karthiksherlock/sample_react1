@@ -57,16 +57,16 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
   };
 
   return (
-    <div className="modalOverlay">
-      <div className="modalCard addMicroCopyModalCard">
-        <div className="modalHeader">
+    <div className="microCopyModalOverlay">
+      <div className="microCopyModalCard">
+        <div className="microCopyModalHeader">
           <h2>Add a new Micro-copy</h2>
-          <button className="modalCloseButton" onClick={onClose}>
+          <button className="microCopyCloseButton" onClick={onClose}>
             <X size={20} />
           </button>
         </div>
-        <div className="modalBody">
-          <div className="formGroup">
+        <div className="microCopyModalBody">
+          <div className="microCopyFormGroup">
             <label>Enter micro-copy key</label>
             <input
               ref={inputRef}
@@ -94,12 +94,12 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
             ))}
           </div>
         </div>
-        <div className="modalFooter">
-          <button className="secondaryButton" onClick={onClose}>
+        <div className="microCopyModalFooter">
+          <button className="microCopySecondaryButton" onClick={onClose}>
             Cancel
           </button>
 
-          <button className="primaryButton" onClick={handleSave}>
+          <button className="microCopyPrimaryButton" onClick={handleSave}>
             Save
           </button>
         </div>

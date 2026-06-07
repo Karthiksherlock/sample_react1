@@ -105,16 +105,16 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
   };
 
   return (
-    <div className="modalOverlay">
-      <div className="modalCard">
-        <div className="modalHeader">
+    <div className="languageModalOverlay">
+      <div className="languageModalCard">
+        <div className="languageModalHeader">
           <h2>Add a new Language</h2>
-          <button className="modalCloseButton" onClick={onClose}>
+          <button className="languageCloseButton" onClick={onClose}>
             <X size={20} />
           </button>
         </div>
-        <div className="modalBody">
-          <div className="formGroup">
+        <div className="languageModalBody">
+          <div className="languageFormGroup">
             <label>
               Language Name <span className="requiredMark">*</span>
             </label>
@@ -128,7 +128,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
               <p className="fieldErrorText">{errors.name}</p>
           )}
           </div>
-          <div className="formGroup">
+          <div className="languageFormGroup">
             <label>
               IANA Code <span className="requiredMark">*</span>
             </label>
@@ -141,7 +141,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
               <p className="fieldErrorText">{errors.iana_code}</p>
             )}
           </div>
-          <div className="formGroup">
+          <div className="languageFormGroup">
             <label>
               ISO Code <span className="requiredMark">*</span>
             </label>
@@ -154,7 +154,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
               <p className="fieldErrorText">{errors.iso_code}</p>
           )}
           </div>
-          <div className="formGroup">
+          <div className="languageFormGroup">
             <label>
               Font Family <span className="requiredMark">*</span>
             </label>
@@ -167,7 +167,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
               <p className="fieldErrorText">{errors.font_family}</p>
         )}
           </div>
-          <div className="formGroup">
+          <div className="languageFormGroup">
             <label>
               Font URL <span className="requiredMark">*</span>
             </label>
@@ -182,11 +182,11 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
           </div>
         </div>
 
-        <div className="modalFooter">
-          <button className="secondaryButton" onClick={onClose}>
+        <div className="languageModalFooter">
+          <button className="languageSecondaryButton" onClick={onClose}>
             cancel
           </button>
-          <button className="primaryButton" onClick={handleSave}>
+          <button className="languagePrimaryButton" onClick={handleSave}>
             Create Language
           </button>
         </div>
