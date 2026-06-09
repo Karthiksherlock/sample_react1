@@ -1,13 +1,8 @@
 .page,
 .page * {
   font-family:
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji";
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
 }
 .page {
   max-width: 1120px;
@@ -17,7 +12,7 @@
 
 .tabsHeader {
   display: flex;
-  
+
   justify-content: space-between;
 
   align-items: center;
@@ -54,74 +49,109 @@
 .main {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .languagebox {
-  background: white;
+  background: rgb(255, 255, 255);
+  margin-top: 6px;
+  margin-bottom: 6px;
 
   border: 1px solid #e2e8f0;
 
   border-radius: 16px;
-
-  padding: 20px;
+  padding: 0;
+  overflow: hidden;
 }
 
 .languageheader {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  height: 44px;
+
+  padding: 12px 16px;
 
   cursor: pointer;
+
+  box-sizing: border-box;
 }
 .languageheader h3 {
   margin: 0;
+  padding: 0px;
+  line-height: 24px;
 
-  font-size: 16px;
-  font-weight: 600;
-
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
   color: #0f172a;
 }
 
 .chevronOpen {
-  transform: rotate(0deg);
-  transition: 0.2s;
+  transform: rotate(-180deg);
+  transition: transform 0.2s ease;
 }
 
 .chevronClosed {
-  transform: rotate(-90deg);
-  transition: 0.2s;
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
 }
 
 .languagedetails {
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  gap: 20px 32px;
+  row-gap: 16px;
+  column-gap: 24px;
 
-  margin-top: 24px;
+  padding: 0 24px 24px;
+}
+.fullWidth {
+  grid-column: span 2;
 }
 
+.detailitem {
+  display: grid;
+
+  row-gap: 8px;
+}
+.detailitem.fullWidth {
+  grid-column: 1 / -1;
+}
 .detailitem label {
   display: block;
+  color: #020817;
 
-  font-size: 12px;
-  font-weight: 600;
-
-  color: #64748b;
-
-  text-transform: uppercase;
-
-  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  margin: 0;
+  text-transform: none;
 }
 
 .detailitem p {
   margin: 0;
 
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+
+  height: 25px;
+
+  padding: 8px 12px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #020817;
+
+  font-size: 14px;
+  font-weight: 400;
   line-height: 20px;
 
-  color: #0f172a;
+  overflow: hidden;
 }
 
 .microcopybox {

@@ -253,7 +253,14 @@ function LanguagePage() {
                 ["Font Family", "font_family"],
                 ["Font URL", "font_url"],
               ].map(([label, key]) => (
-                <div className="detailitem" key={key}>
+                <div
+                  className={`detailitem ${
+                    key === "name" || key === "font_url"
+                      ? "fullWidth"
+                      : ""
+                  }`}
+                  key={key}
+                >
                   <label>{label}</label>
                   <p>
                     {String(
