@@ -7,16 +7,17 @@
 
 .headerLeft {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
 }
 
 .logoBox {
-  width: 48px;
+  width: 46px;
   height: 48px;
   border-radius: 12px;
 
-  background: #f97316;
+  background: #f96c1a;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
 
   display: flex;
   align-items: center;
@@ -47,7 +48,7 @@
 }
 
 .headerLeft p {
-  margin: 4px 0 0;
+  margin: 0;
 
   color: #64748b;
 
@@ -56,31 +57,44 @@
   line-height: 20px;
 
   text-align: left;
+
+  max-width: 323px;
 }
 
 .headeractions {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-shrink: 1;
   align-items: center;
   gap: 12px;
 }
 
 .headeractions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
   height: 40px;
 
-  padding: 0 16px;
+  padding: 8px 16px;
 
-  border-radius: 10px;
+  border-radius: 6px;
 
   font-size: 14px;
   font-weight: 500;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  line-height: 20px;
 
   cursor: pointer;
 
-  transition: 0.15s;
+  transition:
+    color 0.15s,
+    background-color 0.15s,
+    border-color 0.15s;
+
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .headeractions button:first-child {

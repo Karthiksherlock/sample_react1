@@ -5,53 +5,29 @@ body,
   min-height: 100%;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
   font-family:
     ui-sans-serif,
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    "SF Pro Display",
     "Segoe UI",
-    "Helvetica Neue",
-    Arial,
     sans-serif;
 
-  font-size: 14px;
-  line-height: 1.5;
-
-  color: #0f172a;
   background: #f8fafc;
+  color: #0f172a;
+
+  font-size: 16px;
+  line-height: 1.5;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  text-rendering: optimizeLegibility;
 }
 
 #root {
   min-height: 100vh;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
+* {
+  box-sizing: border-box;
 }

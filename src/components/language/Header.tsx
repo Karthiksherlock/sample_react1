@@ -31,17 +31,17 @@ function Header({
 
       <div className="headeractions">
         <button onClick={onExport}>
-          <Download size={18} />
+          <Download size={14} />
           Export JSON
         </button>
 
         <button onClick={onSave}>
-          <Save size={18} />
+          <Save size={14} />
           Save changes
         </button>
 
         <button onClick={onAddLanguage}>
-          <Plus size={18} />
+          <Plus size={14} />
           Add Language
         </button>
       </div>

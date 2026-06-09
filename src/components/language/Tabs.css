@@ -1,58 +1,71 @@
 .tabsContainer {
   display: inline-flex;
-  gap: 4px;
+  align-items: center;
+  gap: 2px;
 
-  background: #fff;
-  border: 1px solid #edf2f7;
+  padding: 2px;
 
-  padding: 8px;
-
-  border-radius: 12px;
+  background: white;
 }
 
 .tab,
 .activeTab {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+
+  gap: 6px;
+
+  height: 34px;
+
+  padding: 6px 10px;
+
   border: none;
-  border-radius: 10px;
-  padding: 10px 18px;
+
+  border-radius: 4px;
+
   cursor: pointer;
-  background: transparent;
-  color: #64748b;
-  font-weight: 600;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+  white-space: nowrap;
 }
+
 .tab {
-  height: 40px;
-  color: #64748b;
+  background: transparent;
+  color: rgb(100, 116, 139);
 }
-.tab:hover {
-  background: #f8fafc;
-}
+
 .activeTab {
-  height: 40px;
-
-  background: #ff7a1a;
-
-  border-radius: 10px;
-
+  background: rgb(249, 108, 26);
   color: white;
 
-  font-weight: 600;
-  box-shadow: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
+
 .tabBadge {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  min-width: 28px;
-  height: 24px;
-
   margin-left: 6px;
-  background: rgba(251, 248, 248, 0.25);
+
+  min-width: 26px;
+  height: 22px;
+
   padding: 2px 8px;
-  border-radius: 999px;
+
+  border-radius: 9999px;
+
+  background: rgb(255, 244, 235);
+
+  color: rgb(249, 108, 26);
+
   font-size: 12px;
+  font-weight: 600;
+
+  line-height: 16px;
 }
