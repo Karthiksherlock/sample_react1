@@ -47,14 +47,14 @@
 }
 
 .main {
-  display: flex;
+  display: block;
   flex-direction: column;
   gap: 16px;
 }
 
 .languagebox {
   background: rgb(255, 255, 255);
-  margin-top: 6px;
+  margin-top: 24px;
   margin-bottom: 6px;
 
   border: 1px solid #e2e8f0;
@@ -160,20 +160,24 @@
   border: 1px solid #e2e8f0;
 
   border-radius: 12px;
+  margin-top: 24px;
 
-  padding: 20px;
+  padding: 24px;
 }
 
 .microcopyheader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  height: 40px;
 }
 .microcopyheader h3 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 16px;
+  height: 24px;
+  line-height: 24px;
+  font-weight: 600;
   color: #111827;
 }
 .microcopyTitle {
@@ -185,14 +189,14 @@
 .keyBadge {
   background: #fff7ed;
   color: #f97316;
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 .microcopyactions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .microcopyactions input {
@@ -212,7 +216,7 @@
 }
 .searchBox {
   position: relative;
-  width: 260px;
+  width: 300px;
 }
 
 .searchIcon {
@@ -230,7 +234,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 .emptyState {
   padding: 48px 24px;
