@@ -109,8 +109,11 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
       <div className="languageModalCard">
         <div className="languageModalHeader">
           <h2>Add a new Language</h2>
+          <p className="languageModalSubtitle">
+            Provide the metadata. You can add micro-copies after creating it.
+          </p>
           <button className="languageCloseButton" onClick={onClose}>
-            <X size={20} />
+            <X size={18} />
           </button>
         </div>
         <div className="languageModalBody">
@@ -128,38 +131,41 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
               <p className="fieldErrorText">{errors.name}</p>
           )}
           </div>
-          <div className="languageFormGroup">
-            <label>
-              IANA Code <span className="requiredMark">*</span>
-            </label>
-            <input
-              placeholder="e.g. fr-FR"
-              value={formData.iana_code}
-              onChange={(e) => handleChange("iana_code", e.target.value)}
-            />
-            {errors.iana_code && (
-              <p className="fieldErrorText">{errors.iana_code}</p>
-            )}
-          </div>
-          <div className="languageFormGroup">
-            <label>
-              ISO Code <span className="requiredMark">*</span>
-            </label>
-            <input
-              placeholder="e.g. fr"
-              value={formData.iso_code}
-              onChange={(e) => handleChange("iso_code", e.target.value)}
-            />
-            {errors.iso_code && (
-              <p className="fieldErrorText">{errors.iso_code}</p>
-          )}
+          <div className="languageFieldRow">
+            <div className="languageFormGroup">
+              <label>
+                IANA Code <span className="requiredMark">*</span>
+              </label>
+
+              <input
+                placeholder="e.g. fr-FR"
+                value={formData.iana_code}
+                onChange={(e) =>
+                  handleChange("iana_code", e.target.value)
+                }
+              />
+            </div>
+
+            <div className="languageFormGroup">
+              <label>
+                ISO Code <span className="requiredMark">*</span>
+              </label>
+
+              <input
+                placeholder="e.g. fr"
+                value={formData.iso_code}
+                onChange={(e) =>
+                  handleChange("iso_code", e.target.value)
+                }
+              />
+            </div>
           </div>
           <div className="languageFormGroup">
             <label>
               Font Family <span className="requiredMark">*</span>
             </label>
             <input
-              placeholder="e.g. Arial"
+              placeholder="Arial"
               value={formData.font_family}
               onChange={(e) => handleChange("font_family", e.target.value)}
             />
@@ -172,7 +178,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
               Font URL <span className="requiredMark">*</span>
             </label>
             <input
-              placeholder="e.g. https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+              placeholder="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
               value={formData.font_url}
               onChange={(e) => handleChange("font_url", e.target.value)}
             />
@@ -184,7 +190,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
 
         <div className="languageModalFooter">
           <button className="languageSecondaryButton" onClick={onClose}>
-            cancel
+            Cancel
           </button>
           <button className="languagePrimaryButton" onClick={handleSave}>
             Create Language

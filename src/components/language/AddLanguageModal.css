@@ -1,26 +1,32 @@
 .languageModalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.55);
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 50;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  z-index: 1000;
 }
 
 .languageModalCard {
   background: white;
-  border-radius: 24px;
 
-  width: min(92vw, 520px);
-  margin: 20px;
-  padding: 32px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-  animation: languageModalEnter 0.2s ease;
+  width: 512px;
+
+  padding: 24px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  animation: languageModalEnter 0.15s ease;
+
+  display: grid;
+  row-gap: 16px;
 }
 @keyframes languageModalEnter {
   from {
@@ -35,85 +41,112 @@
 }
 
 .languageModalHeader {
+  position: relative;
+
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 4px;
-  margin-bottom: 28px;
+  flex-direction: column;
+
+  height: 44px;
+
+  align-items: flex-start;
 }
 
 .languageModalHeader h2 {
-  line-height: 1.2;
-  letter-spacing: -0.5px;
-  font-size: 28px;
-  font-weight: 700;
-  color: #111827;
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 18px;
+
+  letter-spacing: -0.45px;
+
+  color: #020817;
+}
+.languageModalSubtitle {
+  margin: 8px 0 0;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  color: #64748b;
+
+  line-height: 20px;
 }
 .languageCloseButton {
-  border: none;
-  background: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
 
-  cursor: pointer;
+  width: 32px;
+  height: 32px;
 
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-
-  font-size: 24px;
-  color: #6b7280;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background: transparent;
+  border: none;
+
+  color: #64748b;
 }
 .languageCloseButton:hover {
   background: #f3f4f6;
 }
 .languageModalBody {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  display: grid;
+
+  row-gap: 16px;
+
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .languageFormGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+
+  row-gap: 8px;
 }
 
 .languageFormGroup label {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
 
-  color: #475569;
+  line-height: 14px;
+
+  color: #020817;
 }
-
-.languageFormGroup input,
-.languageFormGroup textarea {
-  color: #111827;
-  line-height: 1.5;
-  border: 1px solid #dbe2ea;
-  border-radius: 14px;
-  height: 52px;
-
-  padding: 14px 16px;
-
-  font-size: 15px;
-
-  outline: none;
+.languageFormGroup input {
   width: 100%;
-  transition: all 0.2s ease;
+
+  height: 40px;
+
+  padding: 8px 12px;
+
+  font-size: 14px;
+
+  color: #020817;
+
+  background: white;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 6px;
 
   box-sizing: border-box;
 }
-.languageFormGroup input::placeholder,
-.languageFormGroup textarea::placeholder {
+.languageFormGroup input::placeholder {
   color: #94a3b8;
 }
-.languageFormGroup input:focus,
-.languageFormGroup textarea:focus {
-  border-color: #f97316;
+.languageFormGroup input:focus {
+  outline: none;
+  border-color: #f96c1a;
+}
+.languageFieldRow {
+  display: grid;
 
-  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+  grid-template-columns: 1fr 1fr;
+
+  column-gap: 16px;
 }
 .requiredMark {
   color: #dc2626;
@@ -129,47 +162,60 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
-  gap: 12px;
-
-  margin-top: 32px;
+  gap: 8px;
 }
 .languagePrimaryButton {
-  background: #f97316;
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+
+  padding: 8px 16px;
 
   border: none;
-  border-radius: 12px;
+  border-radius: 6px;
 
-  padding: 12px 22px;
+  background: #f96c1a;
 
-  font-weight: 600;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 
   cursor: pointer;
-  height: 48px;
-  min-width: 110px;
 }
-
 .languageSecondaryButton {
-  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+
+  padding: 8px 16px;
+
+  background: transparent;
 
   border: none;
-  border-radius: 12px;
 
-  padding: 12px 22px;
+  border-radius: 6px;
 
-  font-weight: 600;
+  color: #020817;
+
+  font-size: 14px;
+  font-weight: 500;
 
   cursor: pointer;
-  height: 48px;
-  min-width: 110px;
 }
 .languagePrimaryButton:hover {
   opacity: 0.92;
 }
 
 .languageSecondaryButton:hover {
-  background: #e5e7eb;
+  background: rgba(0, 0, 0, 0.04);
 }
 
 
