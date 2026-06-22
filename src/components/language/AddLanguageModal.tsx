@@ -144,6 +144,9 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
                   handleChange("iana_code", e.target.value)
                 }
               />
+              {errors.iana_code && (
+                <p className="fieldErrorText">{errors.iana_code}</p>
+              )}
             </div>
 
             <div className="languageFormGroup">
@@ -158,6 +161,9 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
                   handleChange("iso_code", e.target.value)
                 }
               />
+              {errors.iso_code && (
+                <p className="fieldErrorText">{errors.iso_code}</p>
+              )}
             </div>
           </div>
           <div className="languageFormGroup">

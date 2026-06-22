@@ -61,8 +61,11 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
       <div className="microCopyModalCard">
         <div className="microCopyModalHeader">
           <h2>Add a new Micro-copy</h2>
+          <p className="microCopyHeaderDescription">
+            Add a key and its translated values for the each language.
+          </p>
           <button className="microCopyCloseButton" onClick={onClose}>
-            <X size={20} />
+            <X size={16} />
           </button>
         </div>
         <div className="microCopyModalBody">
@@ -70,7 +73,7 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
             <label>Enter micro-copy key</label>
             <input
               ref={inputRef}
-              placeholder=" e.g. WelcomeText"
+              placeholder="e.g. WelcomeText"
               value={key}
               onChange={(e) => {
                 setKey(e.target.value);
@@ -80,20 +83,22 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
           </div>
           {error && <p className="KeyErrorText">{error}</p>}
           <div className="sectionDivider" />
-          <h3 className="sectionTitle">Translation Values</h3>
-          <div className="languageValuesContainer scrollableValues">
-            {languages.map((language) => (
-              <div key={language} className="languageValueItem">
-                <label>{language}</label>
-                <textarea
-                  placeholder={`Value for ${language}`}
-                  value={values[language] || ""}
-                  onChange={(e) => handleValueChange(language, e.target.value)}
-                />
+            <div className="translationSection">
+              <h3 className="sectionTitle">Translation Values</h3>
+              <div className="languageValuesContainer scrollableValues">
+                {languages.map((language) => (
+                  <div key={language} className="languageValueItem">
+                    <label>{language}</label>
+                    <textarea
+                      placeholder={`Value for ${language}`}
+                      value={values[language] || ""}
+                      onChange={(e) => handleValueChange(language, e.target.value)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
         <div className="microCopyModalFooter">
           <button className="microCopySecondaryButton" onClick={onClose}>
             Cancel

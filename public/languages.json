@@ -7,7 +7,7 @@
     "font_family": "Noto Sans",
     "micro_copies": {
       "WelcomeText": "Cheers offers users to show greetings on the big screen!",
-      "GeneralContinue": "Continue",
+      "GeneralContinue": "Continue ",
       "GeneralCancel": "Cancel",
       "GeneralSubmit": "Submit",
       "GeneralBack": "Back"
