@@ -9,7 +9,9 @@
   margin: 0 auto;
   padding: 32px;
 }
-
+body {
+  background: #f8fafc;
+}
 .tabsHeader {
   display: flex;
 
@@ -38,12 +40,12 @@
   background: #f96c1a;
   color: white;
   border: none;
-
+  cursor: pointer;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .addMicroCopyTopButton:hover {
-  background: #ea580c;
+  opacity: 0.92;
 }
 
 .main {
@@ -80,7 +82,6 @@
 .languageheader h3 {
   margin: 0;
   padding: 0px;
-  line-height: 24px;
 
   font-size: 14px;
   font-weight: 500;
@@ -199,21 +200,6 @@
   gap: 12px;
 }
 
-.microcopyactions input {
-  width: 100%;
-  height: 44px;
-  border: 1px solid #d7dde6;
-  border-radius: 10px;
-  padding-left: 42px;
-  font-size: 15px;
-}
-
-.microcopyactions button {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
 .searchBox {
   position: relative;
   width: 300px;
@@ -228,8 +214,28 @@
 }
 
 .searchBox input {
-  padding-left: 42px;
+  width: 100%;
   height: 40px;
+  padding: 0 12px 0 38px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.searchBox input::placeholder {
+  color: #9ca3af;
+}
+
+.searchBox input:focus {
+  border-color: #e2e8f0;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #f96c1a;
+  outline: none;
 }
 .list {
   display: flex;

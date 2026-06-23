@@ -63,7 +63,7 @@
   color: #020817;
 }
 .languageModalSubtitle {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
 
   font-size: 14px;
   font-weight: 400;
@@ -97,7 +97,7 @@
 
   row-gap: 16px;
 
-  padding-top: 8px;
+  padding-top: 4px;
   padding-bottom: 8px;
 }
 
@@ -138,8 +138,11 @@
   color: #94a3b8;
 }
 .languageFormGroup input:focus {
+ border-color: #e2e8f0;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #f96c1a;
   outline: none;
-  border-color: #f96c1a;
 }
 .languageFieldRow {
   display: grid;
@@ -215,12 +218,9 @@
 }
 
 .languageSecondaryButton:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background-color: hsl(28 100% 96%);
+  color: hsl(22 95% 40%);
 }
-
-
-
-
 
 
 

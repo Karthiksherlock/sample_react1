@@ -118,16 +118,26 @@
   justify-self: end;
 
   display: flex;
-  align-items: end;
+  align-items: start;
   justify-content: end;
 
   border: none;
-
+  border-radius: 6px;
+  
   background: transparent;
 
-  color: #94a3b8;
+  color: rgb(57, 68, 83);
 
   cursor: pointer;
+}
+.deleteButton svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.deleteButton:hover {
+  background-color: hsl(28 100% 96%);
+  color: hsl(22 95% 40%);
 }
 
 

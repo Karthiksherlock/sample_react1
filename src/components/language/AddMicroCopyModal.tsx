@@ -105,7 +105,7 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
           </button>
 
           <button className="microCopyPrimaryButton" onClick={handleSave}>
-            Save
+            Add
           </button>
         </div>
       </div>

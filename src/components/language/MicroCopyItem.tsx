@@ -31,7 +31,7 @@ function MicroCopyItem({ microCopyKey, value, onChange, onDelete }: Props) {
       </div>
 
       <button className="deleteButton" onClick={() => onDelete(microCopyKey)}>
-        <Trash2 />
+        <Trash2 size={16} strokeWidth={1.5} />
       </button>
     </div>
   );
