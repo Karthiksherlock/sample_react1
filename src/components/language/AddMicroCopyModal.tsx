@@ -26,6 +26,7 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
     }
   }, [open]);
 
+
   if (!open) return null;
   const keyRegex = /^[a-zA-Z0-9_-]+$/;
   const handleSave = () => {

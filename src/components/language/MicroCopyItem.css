@@ -1,7 +1,7 @@
 .microCopyCard {
   display: grid;
 
-  grid-template-columns: minmax(180px,260px) 1fr auto;
+  grid-template-columns: minmax(180px, 260px) 1fr auto;
 
   width: 100%;
   box-sizing: border-box;
@@ -71,7 +71,7 @@
     Consolas,
     "Liberation Mono",
     "Courier New",
-    monospace;
+    monospace !important;
 
   font-size: 14px;
   font-weight: 500;
@@ -105,25 +105,28 @@
 }
 
 .microCopyTextarea:focus {
+  border-color: #e2e8f0;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #f96c1a;
   outline: none;
-  border-color: #f97316;
 }
 
 .deleteButton {
   width: 40px;
   height: 40px;
 
-  margin: 36px 0 0 0;
+  margin: 20px 0 0 0;
+  border-color: rgb(226, 232, 240);
+  justify-self: auto;
 
-  justify-self: end;
-
-  display: flex;
-  align-items: start;
-  justify-content: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   border: none;
   border-radius: 6px;
-  
+
   background: transparent;
 
   color: rgb(57, 68, 83);
@@ -137,7 +140,6 @@
 }
 .deleteButton:hover {
   background-color: hsl(28 100% 96%);
-  color: hsl(22 95% 40%);
+  color: hsl(0 84.2% 60.2%);
+  justify-content: center;
 }
-
-

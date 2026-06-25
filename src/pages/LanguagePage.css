@@ -5,9 +5,9 @@
     "Segoe UI Symbol", "Noto Color Emoji";
 }
 .page {
-  max-width: 1120px;
+  max-width: 72rem;
   margin: 0 auto;
-  padding: 32px;
+  padding: 2rem 11rem;
 }
 body {
   background: #f8fafc;
@@ -64,6 +64,7 @@ body {
   border-radius: 8px;
   padding: 0;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06)
 }
 
 .languageheader {
@@ -90,11 +91,13 @@ body {
 }
 
 .chevronOpen {
+  color: #64748b;;
   transform: rotate(-180deg);
   transition: transform 0.2s ease;
 }
 
 .chevronClosed {
+  color: #64748b;
   transform: rotate(0deg);
   transition: transform 0.2s ease;
 }
@@ -221,13 +224,14 @@ body {
   border-radius: 8px;
   background: #ffffff;
   color: #0f172a;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
   box-sizing: border-box;
+  cursor: text;
 }
 
 .searchBox input::placeholder {
-  color: #9ca3af;
+  color:  #6b7280;
 }
 
 .searchBox input:focus {

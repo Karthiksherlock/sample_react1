@@ -1,8 +1,7 @@
 .microCopyModalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.55);
-
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,7 +132,7 @@
 .microCopyFormGroup input::placeholder,
 .microCopyFormGroup textarea::placeholder,
 .languageValueItem textarea::placeholder {
-  color: #94a3b8;
+  color: #64748b;
 }
 .KeyErrorText {
   color: #dc2626;

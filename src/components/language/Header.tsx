@@ -19,12 +19,11 @@ function Header({
           <Languages size={24} />
         </div>
 
-        <div>
+        <div className="headerText">
           <h2>Language Editor</h2>
 
           <p>
-            Manage languages.json across
-            supported locales
+            Manage languages.json across supported locales
           </p>
         </div>
       </div>

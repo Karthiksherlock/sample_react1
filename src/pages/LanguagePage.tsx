@@ -285,7 +285,7 @@ function LanguagePage() {
 
                 <input
                   type="text"
-                  placeholder="      Search keys or values..."
+                  placeholder="   Search keys or values..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
