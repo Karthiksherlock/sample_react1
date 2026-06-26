@@ -279,17 +279,15 @@ function LanguagePage() {
               <h3>Micro-copies</h3>
               <span className="keyBadge">{totalKeys} keys</span>
             </div>
-            <div className="microcopyactions">
-              <div className="searchBox">
-                <Search size={18} className="searchIcon" />
+            <div className="searchBox">
+              <Search size={18} className="searchIcon" />
 
-                <input
-                  type="text"
+              <input
+                type="text"
                   placeholder="   Search keys or values..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-              </div>
             </div>
           </div>
 

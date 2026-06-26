@@ -4,13 +4,8 @@
   align-items: flex-start;
   margin-bottom: 24px;
   gap: 1rem;
-}
-@media (max-width: 675px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+}                
+
 .headerLeft {
   display: flex;
   align-items: center;
@@ -65,11 +60,14 @@
     "Liberation Mono", "Courier New", monospace;
   
   word-spacing: -5px;
+  letter-spacing: normal;
 
   text-align: left;
 
 }
-
+.headerText{
+  flex: 1;
+}
 .headeractions {
   display: flex;
   flex-wrap: wrap;
@@ -85,6 +83,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  flex-shrink:0;
+  white-space:nowrap;
 
   height: 40px;
 
@@ -130,4 +130,17 @@
 .headeractions button svg {
   width: 16px;
   height: 16px;
+}
+@media (max-width: 675px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  .headeractions{
+    flex-wrap: nowrap;
+  }
+  .headerLeft p {
+    flex-wrap: nowrap;
+  }
 }

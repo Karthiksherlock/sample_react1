@@ -36,6 +36,17 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
       inputRef.current?.focus();
     }
   }, [open]);
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   if (!open) return null;
 
@@ -184,7 +195,7 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
               Font URL <span className="requiredMark">*</span>
             </label>
             <input
-              placeholder="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+              placeholder="https://fonts.googleapis.com/..."
               value={formData.font_url}
               onChange={(e) => handleChange("font_url", e.target.value)}
             />

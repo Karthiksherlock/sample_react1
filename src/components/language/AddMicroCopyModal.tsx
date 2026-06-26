@@ -25,7 +25,17 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
       inputRef.current?.focus();
     }
   }, [open]);
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   if (!open) return null;
   const keyRegex = /^[a-zA-Z0-9_-]+$/;
@@ -84,22 +94,24 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
           </div>
           {error && <p className="KeyErrorText">{error}</p>}
           <div className="sectionDivider" />
-            <div className="translationSection">
-              <h3 className="sectionTitle">Translation Values</h3>
-              <div className="languageValuesContainer scrollableValues">
-                {languages.map((language) => (
-                  <div key={language} className="languageValueItem">
-                    <label>{language}</label>
-                    <textarea
-                      placeholder={`Value for ${language}`}
-                      value={values[language] || ""}
-                      onChange={(e) => handleValueChange(language, e.target.value)}
-                    />
-                  </div>
-                ))}
-              </div>
+          <div className="translationSection">
+            <h3 className="sectionTitle">Translation Values</h3>
+            <div className="languageValuesContainer scrollableValues">
+              {languages.map((language) => (
+                <div key={language} className="languageValueItem">
+                  <label>{language}</label>
+                  <textarea
+                    placeholder={`Value for ${language}`}
+                    value={values[language] || ""}
+                    onChange={(e) =>
+                      handleValueChange(language, e.target.value)
+                    }
+                  />
+                </div>
+              ))}
             </div>
           </div>
+        </div>
         <div className="microCopyModalFooter">
           <button className="microCopySecondaryButton" onClick={onClose}>
             Cancel

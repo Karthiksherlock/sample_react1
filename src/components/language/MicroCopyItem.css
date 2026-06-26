@@ -64,14 +64,8 @@
   color: rgb(249, 108, 26);
 
   font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    "Courier New",
-    monospace !important;
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace !important;
 
   font-size: 14px;
   font-weight: 500;
@@ -142,4 +136,34 @@
   background-color: hsl(28 100% 96%);
   color: hsl(0 84.2% 60.2%);
   justify-content: center;
+}
+@media (max-width: 675px) {
+  .microCopyCard {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+
+  .microCopyContent {
+    display: block;
+  }
+
+  .microCopyKeySection {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .microCopyValueSection {
+    margin-top: 12px;
+    width: 100%;
+    min-height: auto;
+  }
+  .microCopyTextarea {
+    width: 100%;
+  }
+
+  .deleteButton {
+    margin-top: 0;
+    justify-self: flex-start;
+    align-self: flex-start;
+  }
 }
