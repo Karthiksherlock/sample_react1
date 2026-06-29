@@ -68,8 +68,8 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
   };
 
   return (
-    <div className="microCopyModalOverlay">
-      <div className="microCopyModalCard">
+    <div className="microCopyModalOverlay" onClick={onClose}>
+      <div className="microCopyModalCard"  onClick={(e) => e.stopPropagation()}>
         <div className="microCopyModalHeader">
           <h2>Add a new Micro-copy</h2>
           <p className="microCopyHeaderDescription">

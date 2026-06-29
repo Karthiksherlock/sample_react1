@@ -127,7 +127,7 @@ body {
 
   padding: 0 24px 24px;
 }
-@media (max-width:768px){
+@media (max-width:680px){
 
     .languagedetails{
         grid-template-columns:1fr;
@@ -229,7 +229,7 @@ body {
 .searchBox {
   position: relative;
   width: 400px;
-  flex-shrink: 0.7;
+  flex-shrink: 1;
 }
 
 .searchIcon {
@@ -239,20 +239,7 @@ body {
   transform: translateY(-50%);
   color: #94a3b8;
 }
-@media (max-width:768px){
 
-    .microcopyheader{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:16px;
-        height:auto;
-    }
-
-    .searchBox{
-        width:100%;
-    }
-
-}
 .searchBox input {
   width: 100%;
   height: 40px;
@@ -291,4 +278,18 @@ body {
 
   font-size: 15px;
   font-weight: 500;
+}
+@media (max-width:680px){
+
+    .microcopyheader{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+        height:auto;
+    }
+
+    .searchBox{
+        width:100%;
+    }
+
 }

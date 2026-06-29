@@ -116,8 +116,8 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
   };
 
   return (
-    <div className="languageModalOverlay">
-      <div className="languageModalCard">
+    <div className="languageModalOverlay" onClick={onClose}>
+      <div className="languageModalCard" onClick={(e) => e.stopPropagation()}>
         <div className="languageModalHeader">
           <h2>Add a new Language</h2>
           <p className="languageModalSubtitle">
