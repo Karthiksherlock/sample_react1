@@ -36,6 +36,14 @@ function AddMicroCopyModal({ open, onClose, onSave, languages }: Props) {
       document.body.style.overflow = "";
     };
   }, [open]);
+  
+  useEffect(() => {
+    if (!open) {
+      setKey("");
+      setValues({});
+      setError("");
+    }
+  }, [open]);
 
   if (!open) return null;
   const keyRegex = /^[a-zA-Z0-9_-]+$/;

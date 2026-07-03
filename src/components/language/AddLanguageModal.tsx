@@ -47,6 +47,25 @@ function AddLanguageModal({ open, onClose, onSave }: Props) {
       document.body.style.overflow = "";
     };
   }, [open]);
+  useEffect(() => {
+    if (!open) {
+      setFormData({
+        name: "",
+        iana_code: "",
+        iso_code: "",
+        font_family: "",
+        font_url: "",
+      });
+
+      setErrors({
+        name: "",
+        iana_code: "",
+        iso_code: "",
+        font_family: "",
+        font_url: "",
+      });
+    }
+  }, [open]);
 
   if (!open) return null;
 

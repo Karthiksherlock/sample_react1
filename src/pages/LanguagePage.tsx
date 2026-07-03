@@ -27,6 +27,8 @@ type LanguagesData = {
 
 function LanguagePage() {
   const [languagesData, setLanguagesData] = useState<LanguagesData>({});
+  const [originalLanguagesData, setOriginalLanguagesData] =
+    useState<LanguagesData>({});
 
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [search, setSearch] = useState("");
@@ -126,10 +128,20 @@ function LanguagePage() {
     [microCopies],
   );
   const handleSave = () => {
+    const hasChanges =
+      JSON.stringify(languagesData) !== JSON.stringify(originalLanguagesData);
+
+    if (!hasChanges) {
+      alert("No changes to save.");
+      return;
+    }
+
     console.log("Saving:", languagesData);
 
     setTimeout(() => {
       alert("Saved successfully!");
+
+      setOriginalLanguagesData(languagesData);
     }, 500);
   };
   const handleExport = () => {
@@ -189,6 +201,7 @@ function LanguagePage() {
         const response = await axios.get<LanguagesData>("/languages.json");
         const data = response.data;
         setLanguagesData(data);
+        setOriginalLanguagesData(data);
         const langs = Object.keys(data);
         if (langs.length > 0) {
           setSelectedLanguage(langs[0]);
@@ -255,9 +268,7 @@ function LanguagePage() {
               ].map(([label, key]) => (
                 <div
                   className={`detailitem ${
-                    key === "name" || key === "font_url"
-                      ? "fullWidth"
-                      : ""
+                    key === "name" || key === "font_url" ? "fullWidth" : ""
                   }`}
                   key={key}
                 >
@@ -284,10 +295,10 @@ function LanguagePage() {
 
               <input
                 type="text"
-                  placeholder="   Search keys or values..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+                placeholder=" Search keys or values..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
           </div>
 
