@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  
 }
 
 .logoBox {
@@ -67,6 +68,7 @@
 }
 .headerText{
   flex: 1;
+  min-width:0;
 }
 .headeractions {
   display: flex;
@@ -138,7 +140,9 @@
     flex-shrink: 0;
   }
   .headeractions{
-    flex-wrap: nowrap;
+    width:100%;
+    flex-wrap:wrap;
+    justify-content:flex-start;
   }
   .headerLeft p {
     flex-wrap: nowrap;

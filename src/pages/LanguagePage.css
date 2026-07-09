@@ -10,31 +10,37 @@
   padding: 2rem 11rem;
 }
 
-@media (max-width:1200px){
+@media (max-width:992px){
     .page{
-        padding:2rem;
+        padding:2rem 5rem;
     }
 }
 
-@media (max-width:900px){
+@media (max-width:768px){
     .page{
-        padding:2.5rem 1.5rem;
+        padding:2rem 2rem;
     }
 }
 
+@media (max-width:480px){
+    .page{
+        padding:1.5rem 1rem;
+    }
+}
 body {
   background: #f8fafc;
 }
-.tabsHeader {
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  margin-bottom: 16px;
+.tabsHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
 }
-
+.tabsWrapper{
+    flex:1;
+    min-width:0;
+}
 
 .addMicroCopyTopButton {
   display: flex;
@@ -62,6 +68,22 @@ body {
 
 .addMicroCopyTopButton:hover {
   opacity: 0.92;
+}
+@media (max-width:540px){
+
+    .tabsHeader{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .tabsWrapper{
+        width:100%;
+    }
+
+    .addMicroCopyTopButton{
+        width:100%;
+    }
+
 }
 
 .main {

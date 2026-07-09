@@ -229,13 +229,14 @@ function LanguagePage() {
       />
 
       <div className="tabsHeader">
-        <Tabs
-          languages={languages}
-          languagesData={languagesData}
-          selectedLanguage={selectedLanguage}
-          onSelect={setSelectedLanguage}
-        />
-
+        <div className="tabsWrapper">
+          <Tabs
+            languages={languages}
+            languagesData={languagesData}
+            selectedLanguage={selectedLanguage}
+            onSelect={setSelectedLanguage}
+          />
+        </div>
         <button
           className="addMicroCopyTopButton"
           onClick={() => setShowKeyModal(true)}
