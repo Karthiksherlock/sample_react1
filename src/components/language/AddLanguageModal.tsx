@@ -1,0 +1,240 @@
+import { useEffect, useRef, useState } from "react";
+import { X } from "lucide-react";
+import "./AddLanguageModal.css";
+export type NewLanguage = {
+  name: string;
+  iana_code: string;
+  iso_code: string;
+  font_family: string;
+  font_url: string;
+};
+
+type Props = {
+  open: boolean;
+  onClose: () => void;
+  onSave: (language: NewLanguage) => void;
+};
+
+function AddLanguageModal({ open, onClose, onSave }: Props) {
+  const [formData, setFormData] = useState<NewLanguage>({
+    name: "",
+    iana_code: "",
+    iso_code: "",
+    font_family: "",
+    font_url: "",
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    iana_code: "",
+    iso_code: "",
+    font_family: "",
+    font_url: "",
+});
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (open) {
+      inputRef.current?.focus();
+    }
+  }, [open]);
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+  useEffect(() => {
+    if (!open) {
+      setFormData({
+        name: "",
+        iana_code: "",
+        iso_code: "",
+        font_family: "",
+        font_url: "",
+      });
+
+      setErrors({
+        name: "",
+        iana_code: "",
+        iso_code: "",
+        font_family: "",
+        font_url: "",
+      });
+    }
+  }, [open]);
+
+  if (!open) return null;
+
+  const handleChange = (key: keyof NewLanguage, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+    setErrors((prev) => ({
+      ...prev,
+      [key]: "",
+    }));
+  };
+  const validateForm = () => {
+    const newErrors = {
+      name: "",
+      iana_code: "",
+      iso_code: "",
+      font_family: "",
+      font_url: "",
+    };
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Language name is required";
+      isValid = false;
+    }
+
+    if (!formData.iana_code.trim()) {
+      newErrors.iana_code = "IANA code is required";
+      isValid = false;
+    }
+
+    if (!formData.iso_code.trim()) {
+      newErrors.iso_code = "ISO code is required";
+      isValid = false;
+    }
+
+    if (!formData.font_family.trim()) {
+      newErrors.font_family = "Font family is required";
+      isValid = false;
+    }
+
+    if (!formData.font_url.trim()) {
+      newErrors.font_url = "Font URL is required";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    return isValid;
+  };
+
+  const handleSave = () => {
+    if (!validateForm()) return;
+    onSave(formData);
+
+    setFormData({
+      name: "",
+      iana_code: "",
+      iso_code: "",
+      font_family: "",
+      font_url: "",
+    });
+
+    onClose();
+  };
+
+  return (
+    <div className="languageModalOverlay" onClick={onClose}>
+      <div className="languageModalCard" onClick={(e) => e.stopPropagation()}>
+        <div className="languageModalHeader">
+          <h2>Add a new Language</h2>
+          <p className="languageModalSubtitle">
+            Provide the metadata. You can add micro-copies after creating it.
+          </p>
+          <button className="languageCloseButton" onClick={onClose}>
+            <X size={18} />
+          </button>
+        </div>
+        <div className="languageModalBody">
+          <div className="languageFormGroup">
+            <label>
+              Language Name <span className="requiredMark">*</span>
+            </label>
+            <input
+              ref={inputRef}
+              placeholder="e.g French"
+              value={formData.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+            />
+            {errors.name && (
+              <p className="fieldErrorText">{errors.name}</p>
+          )}
+          </div>
+          <div className="languageFieldRow">
+            <div className="languageFormGroup">
+              <label>
+                IANA Code <span className="requiredMark">*</span>
+              </label>
+
+              <input
+                placeholder="e.g. fr-FR"
+                value={formData.iana_code}
+                onChange={(e) =>
+                  handleChange("iana_code", e.target.value)
+                }
+              />
+              {errors.iana_code && (
+                <p className="fieldErrorText">{errors.iana_code}</p>
+              )}
+            </div>
+
+            <div className="languageFormGroup">
+              <label>
+                ISO Code <span className="requiredMark">*</span>
+              </label>
+
+              <input
+                placeholder="e.g. fr"
+                value={formData.iso_code}
+                onChange={(e) =>
+                  handleChange("iso_code", e.target.value)
+                }
+              />
+              {errors.iso_code && (
+                <p className="fieldErrorText">{errors.iso_code}</p>
+              )}
+            </div>
+          </div>
+          <div className="languageFormGroup">
+            <label>
+              Font Family <span className="requiredMark">*</span>
+            </label>
+            <input
+              placeholder="Arial"
+              value={formData.font_family}
+              onChange={(e) => handleChange("font_family", e.target.value)}
+            />
+            {errors.font_family && (
+              <p className="fieldErrorText">{errors.font_family}</p>
+        )}
+          </div>
+          <div className="languageFormGroup">
+            <label>
+              Font URL <span className="requiredMark">*</span>
+            </label>
+            <input
+              placeholder="https://fonts.googleapis.com/..."
+              value={formData.font_url}
+              onChange={(e) => handleChange("font_url", e.target.value)}
+            />
+            {errors.font_url && (
+              <p className="fieldErrorText">{errors.font_url}</p>
+            )}
+          </div>
+        </div>
+
+        <div className="languageModalFooter">
+          <button className="languageSecondaryButton" onClick={onClose}>
+            Cancel
+          </button>
+          <button className="languagePrimaryButton" onClick={handleSave}>
+            Create Language
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default AddLanguageModal;
