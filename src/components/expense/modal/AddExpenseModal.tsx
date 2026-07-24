@@ -71,11 +71,7 @@ const categories = [
   },
 ];
 
-const AddExpenseModal = ({
-  open,
-  onClose,
-  onAddTransaction,
-}: AddExpenseModalProps) => {
+const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps) => {
   const [amount, setAmount] = useState("");
 
   const [merchant, setMerchant] = useState("");
