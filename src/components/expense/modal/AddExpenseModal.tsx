@@ -81,6 +81,11 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
   const [date, setDate] = useState("");
 
   const [selectedCategory, setSelectedCategory] = useState("Food");
+  const [errors, setErrors] = useState({
+    amount: "",
+    merchant: "",
+    date: "",
+  });
   if (!open) {
     return null;
   }
@@ -90,10 +95,38 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
     setNote("");
     setDate("");
     setSelectedCategory("Food");
+    setErrors({
+      amount:"",
+      merchant:"",
+      date:"",
+    });
   };
   const handleLogExpense = () => {
-    if (amount.trim() === "" || merchant.trim() === "" || date.trim() === "") {
-      alert("Please fill all required fields.");
+    const validationErrors = {
+      amount: "",
+      merchant: "",
+      date: "",
+    };
+
+    if (!amount.trim()) {
+      validationErrors.amount = "Amount is required";
+    }
+
+    if (!merchant.trim()) {
+      validationErrors.merchant = "Merchant is required";
+    }
+
+    if (!date.trim()) {
+      validationErrors.date = "Date is required";
+    }
+
+    setErrors(validationErrors);
+
+    if (
+      validationErrors.amount ||
+      validationErrors.merchant ||
+      validationErrors.date
+    ) {
       return;
     }
 
@@ -117,7 +150,13 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
         <div className="modalHeader">
           <h2>Add New Expense</h2>
 
-          <button className="closeButton" onClick={onClose}>
+          <button
+            className="closeButton"
+            onClick={() => {
+              resetForm();
+              onClose();
+            }}
+          >
             <X size={24} />
           </button>
         </div>
@@ -130,14 +169,27 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
           <p className="fieldDescription">Enter the expense amount in USD</p>
 
           <div className="amountInputWrapper">
-            <span>$</span>
+            <div className="currencyBox">$</div>
 
             <input
+              className="amountInput"
               type="number"
               placeholder="0.00"
               value={amount}
-              onChange={(event) => setAmount(event.target.value)}
+              onChange={(e)=>{
+                setAmount(e.target.value);
+
+                setErrors(previous=>({
+                  ...previous,
+                  amount:""
+                }));
+              }}
             />
+            {errors.amount && (
+              <p className="fieldError">
+                {errors.amount}
+              </p>
+        )}
           </div>
         </div>
 
@@ -184,8 +236,20 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
             type="text"
             placeholder="e.g. Whole Foods, Uber, Netflix"
             value={merchant}
-            onChange={(event) => setMerchant(event.target.value)}
+            onChange={(e)=>{
+              setMerchant(e.target.value);
+
+              setErrors(previous=>({
+                ...previous,
+                merchant:""
+              }));
+          }}
           />
+          {errors.merchant && (
+            <p className="fieldError">
+              {errors.merchant}
+            </p>
+          )}
         </div>
 
         <div className="formGroup">
@@ -196,8 +260,20 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
           <input
             type="date"
             value={date}
-            onChange={(event) => setDate(event.target.value)}
+            onChange={(e)=>{
+              setDate(e.target.value);
+
+              setErrors(previous=>({
+                ...previous,
+                date:""
+              }));
+            }}
           />
+          {errors.date && (
+            <p className="fieldError">
+              {errors.date}
+            </p>
+          )}
         </div>
 
         <div className="formGroup">
@@ -209,7 +285,7 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
             rows={3}
             placeholder="What was this expense for?"
             value={note}
-            onChange={(event) => setNote(event.target.value)}
+            onChange={(e) => setNote(e.target.value)}
           />
         </div>
 

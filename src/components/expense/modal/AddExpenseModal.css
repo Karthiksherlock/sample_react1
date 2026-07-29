@@ -1,25 +1,19 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-
   background: rgba(15, 23, 42, 0.35);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .modalContainer {
   width: 480px;
-  max-width: 92%;
-
+  max-width: 480px;
+  margin-top: 28px;
   background: white;
-
   border-radius: 22px;
-
-  overflow: hidden;
-
+  overflow-y: auto;
   box-shadow: 0 24px 80px rgba(15, 23, 42, 0.18);
 }
 
@@ -27,34 +21,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding: 24px 26px;
-
   border-bottom: 1px solid #e6edf5;
 }
 
 .modalHeader h2 {
   margin: 0;
-
   font-size: 20px;
   font-weight: 700;
-
   color: #0f172a;
 }
 
 .closeButton {
-  width: 36px;
-  height: 36px;
-
+  width: 32px;
+  height: 32px;
   border: none;
   background: transparent;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   color: #64748b;
-
   cursor: pointer;
 }
 
@@ -66,17 +52,14 @@
 
 .formGroup {
   padding: 0 26px;
-  margin-top: 22px;
+  margin-top: 16px;
 }
 
 .formGroup label {
   display: block;
-
   margin-bottom: 4px;
-
   font-size: 16px;
   font-weight: 600;
-
   color: #0f172a;
 }
 
@@ -86,78 +69,77 @@
 
 .formGroup label small {
   font-weight: 400;
-
   color: #64748b;
 }
 
 .fieldDescription {
-  margin: 0 0 10px;
-
+  margin: 2px 0 8px;
   font-size: 14px;
-
   color: #64748b;
 }
-
 .amountInputWrapper {
   display: flex;
   align-items: center;
-
+  width: 100%;
   height: 50px;
-
   border: 1px solid #d8e1ec;
-
   border-radius: 14px;
-
-  padding: 0 16px;
+  overflow: hidden;
+  background: #fff;
 }
 
+.currencyBox {
+  width: 52px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #e5e7eb;
+  color: #64748b;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.amountInput {
+  flex: 1;
+  width: auto;
+  height: 100%;
+  border: none !important;
+  outline: none;
+  box-shadow: none !important;
+  padding: 0 16px;
+  font-size: 16px;
+  background: transparent;
+}
 .amountInputWrapper:focus-within {
   border-color: #2563eb;
-
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-.amountInputWrapper span {
-  font-size: 20px;
-  user-select: none;
-  color: #64748b;
+.formGroup input:not(.amountInput),
+.formGroup textarea{
+
+    width:100%;
+    border:1px solid #d8e1ec;
+    border-radius:14px;
+    padding:14px 16px;
+    font-size:16px;
+    box-sizing:border-box;
+
 }
+.amountInput{
 
-.amountInputWrapper input {
-  flex: 1;
+    flex:1;
+    border:none !important;
+    outline:none;
+    box-shadow:none !important;
+    background:transparent;
+    padding:0 14px;
 
-  height: 100%;
-
-  border: none;
-  outline: none;
-
-
-  font-size: 18px;
-
-  background: transparent;
 }
-
-.formGroup input,
-.formGroup textarea {
-  width: 100%;
-
-  border: 1px solid #d8e1ec;
-
-  border-radius: 14px;
-
-  padding: 14px 16px;
-
-  font-size: 16px;
-
-  box-sizing: border-box;
-}
-
 .formGroup input:focus,
 .formGroup textarea:focus {
   outline: none;
-
   border-color: #2563eb;
-
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
@@ -167,32 +149,22 @@
 
 .categoryGrid {
   display: grid;
-
   grid-template-columns: repeat(4, 1fr);
-
   gap: 14px;
-
   margin-top: 10px;
 }
 
 .categoryCard {
-  height: 92px;
-
+  height: 86px;
   border: 1px solid #d8e1ec;
-
   border-radius: 16px;
-
   background: white;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  gap: 10px;
-
+  gap: 8px;
   cursor: pointer;
-
   transition: 0.2s;
 }
 
@@ -202,60 +174,52 @@
 
 .categoryCard.selected {
   border: 2px solid #f97316;
-
   background: #fff7ed;
 }
 
 .iconCircle {
-  width: 48px;
-  height: 48px;
-
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
- 
+
 .categoryCard span {
   font-size: 14px;
-
   color: #475569;
 }
 
 .modalFooter {
   display: flex;
-
   gap: 14px;
-
-  padding: 26px;
+  padding: 20px 26px;
 }
 
 .cancelButton,
 .saveButton {
   flex: 1;
-
-  height: 48px;
-
+  height: 44px;
+  font-size: 15px;
   border: none;
-
   border-radius: 14px;
-
-  font-size: 18px;
-
   cursor: pointer;
 }
 
 .cancelButton {
   background: #eef2f7;
-
   color: #64748b;
 }
 
 .saveButton {
   background: #2563eb;
-
   color: white;
-
   font-weight: 600;
+}
+.fieldError {
+  height: 18px;
+  font-size: 13px;
+  color: #ef4444;
+  margin-top: 4px;
 }
