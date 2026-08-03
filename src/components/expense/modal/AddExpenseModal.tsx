@@ -71,7 +71,11 @@ const categories = [
   },
 ];
 
-const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps) => {
+const AddExpenseModal = ({
+  open,
+  onClose,
+  onAddTransaction,
+}: AddExpenseModalProps) => {
   const [amount, setAmount] = useState("");
 
   const [merchant, setMerchant] = useState("");
@@ -96,9 +100,9 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
     setDate("");
     setSelectedCategory("Food");
     setErrors({
-      amount:"",
-      merchant:"",
-      date:"",
+      amount: "",
+      merchant: "",
+      date: "",
     });
   };
   const handleLogExpense = () => {
@@ -157,138 +161,124 @@ const AddExpenseModal = ({open, onClose, onAddTransaction}: AddExpenseModalProps
               onClose();
             }}
           >
-            <X size={24} />
+            <X size={18} />
           </button>
         </div>
+        <div className="modalBody">
+          <div className="formGroup">
+            <label>
+              Amount <span>*</span>
+            </label>
 
-        <div className="formGroup">
-          <label>
-            Amount <span>*</span>
-          </label>
+            <p className="fieldDescription">Enter the expense amount in USD</p>
 
-          <p className="fieldDescription">Enter the expense amount in USD</p>
+            <div className="amountInputWrapper">
+              <div className="currencyBox">$</div>
 
-          <div className="amountInputWrapper">
-            <div className="currencyBox">$</div>
+              <input
+                className="amountInput"
+                type="text"
+                inputMode="decimal"
+                placeholder="0.00"
+                value={amount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+
+                  setErrors((previous) => ({
+                    ...previous,
+                    amount: "",
+                  }));
+                }}
+              />
+            </div>
+            {errors.amount && <p className="fieldError">{errors.amount}</p>}
+          </div>
+
+          <div className="formGroup">
+            <label>
+              Category <span>*</span>
+            </label>
+
+            <div className="categoryGrid">
+              {categories.map((category) => {
+                const Icon = category.icon;
+                const isSelected = selectedCategory === category.name;
+
+                  return (
+                    <button
+                      key={category.name}
+                      type="button"
+                      className={`categoryCard ${isSelected ? "selected" : ""}`}
+                      onClick={() => setSelectedCategory(category.name)}
+                    >
+                      <div
+                        className="iconCircle"
+                        style={{ background: isSelected ? category.color : category.background }}
+                      >
+                        <Icon size={20} color={isSelected ? "#ffffff" : category.color} />
+                      </div>
+
+                      <span>{category.name}</span>
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
+
+          <div className="formGroup">
+            <label>
+              Merchant / Payee <span>*</span>
+            </label>
 
             <input
-              className="amountInput"
-              type="number"
-              placeholder="0.00"
-              value={amount}
-              onChange={(e)=>{
-                setAmount(e.target.value);
+              type="text"
+              placeholder="e.g. Whole Foods, Uber, Netflix"
+              value={merchant}
+              onChange={(e) => {
+                setMerchant(e.target.value);
 
-                setErrors(previous=>({
+                setErrors((previous) => ({
                   ...previous,
-                  amount:""
+                  merchant: "",
                 }));
               }}
             />
-            {errors.amount && (
-              <p className="fieldError">
-                {errors.amount}
-              </p>
-        )}
+            {errors.merchant && <p className="fieldError">{errors.merchant}</p>}
+          </div>
+
+          <div className="formGroup">
+            <label>
+              Date <span>*</span>
+            </label>
+
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => {
+                setDate(e.target.value);
+
+                setErrors((previous) => ({
+                  ...previous,
+                  date: "",
+                }));
+              }}
+            />
+            {errors.date && <p className="fieldError">{errors.date}</p>}
+          </div>
+
+          <div className="formGroup">
+            <label>
+              Note <small>(optional)</small>
+            </label>
+
+            <textarea
+              rows={3}
+              placeholder="What was this expense for?"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
           </div>
         </div>
-
-        <div className="formGroup">
-          <label>
-            Category <span>*</span>
-          </label>
-
-          <div className="categoryGrid">
-            {categories.map((category) => {
-              const Icon = category.icon;
-
-              return (
-                <button
-                  key={category.name}
-                  type="button"
-                  className={`categoryCard ${
-                    selectedCategory === category.name ? "selected" : ""
-                  }`}
-                  onClick={() => setSelectedCategory(category.name)}
-                >
-                  <div
-                    className="iconCircle"
-                    style={{
-                      background: category.background,
-                    }}
-                  >
-                    <Icon size={24} color={category.color} />
-                  </div>
-
-                  <span>{category.name}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="formGroup">
-          <label>
-            Merchant / Payee <span>*</span>
-          </label>
-
-          <input
-            type="text"
-            placeholder="e.g. Whole Foods, Uber, Netflix"
-            value={merchant}
-            onChange={(e)=>{
-              setMerchant(e.target.value);
-
-              setErrors(previous=>({
-                ...previous,
-                merchant:""
-              }));
-          }}
-          />
-          {errors.merchant && (
-            <p className="fieldError">
-              {errors.merchant}
-            </p>
-          )}
-        </div>
-
-        <div className="formGroup">
-          <label>
-            Date <span>*</span>
-          </label>
-
-          <input
-            type="date"
-            value={date}
-            onChange={(e)=>{
-              setDate(e.target.value);
-
-              setErrors(previous=>({
-                ...previous,
-                date:""
-              }));
-            }}
-          />
-          {errors.date && (
-            <p className="fieldError">
-              {errors.date}
-            </p>
-          )}
-        </div>
-
-        <div className="formGroup">
-          <label>
-            Note <small>(optional)</small>
-          </label>
-
-          <textarea
-            rows={3}
-            placeholder="What was this expense for?"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          />
-        </div>
-
         <div className="modalFooter">
           <button
             className="cancelButton"

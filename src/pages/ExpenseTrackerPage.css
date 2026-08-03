@@ -1,5 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
+
+.recentTransactionsCard,
+.modalOverlay {
+   font-family: "DM Sans", sans-serif;
+}
 .expense-page {
   min-height: 100vh;
   background: #f7f8fc;
-  padding: 32px;
+  padding: 40px 24px;
 }
