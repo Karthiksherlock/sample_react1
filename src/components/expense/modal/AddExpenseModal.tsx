@@ -8,7 +8,7 @@ import {
   Car,
   Receipt,
   ShoppingCart,
-  Tv,
+  TvMinimal,
   HeartPulse,
   ShoppingBag,
   Ellipsis,
@@ -24,49 +24,49 @@ const categories = [
   {
     name: "Food",
     icon: UtensilsCrossed,
-    color: "#F97316",
+    color: "rgb(249, 115, 22)",
     background: "#FFF7ED",
   },
   {
     name: "Transport",
     icon: Car,
-    color: "#F59E0B",
+    color: "rgb(245, 158, 11)",
     background: "#FFFBEB",
   },
   {
     name: "Bills",
     icon: Receipt,
-    color: "#8B5CF6",
+    color: "rgb(139, 92, 246)",
     background: "#F5F3FF",
   },
   {
     name: "Groceries",
     icon: ShoppingCart,
-    color: "#10B981",
+    color: "rgb(16, 185, 129)",
     background: "#ECFDF5",
   },
   {
     name: "Entertainment",
-    icon: Tv,
-    color: "#0EA5E9",
+    icon: TvMinimal,
+    color: "rgb(14, 165, 233)",
     background: "#EFF6FF",
   },
   {
     name: "Health",
     icon: HeartPulse,
-    color: "#F43F5E",
+    color: "rgb(244, 63, 94)",
     background: "#FFF1F2",
   },
   {
     name: "Shopping",
     icon: ShoppingBag,
-    color: "#EC4899",
+    color: "rgb(236, 72, 153)",
     background: "#FDF2F8",
   },
   {
     name: "Other",
     icon: Ellipsis,
-    color: "#94A3B8",
+    color: "rgb(148, 163, 184)",
     background: "#F8FAFC",
   },
 ];
@@ -177,8 +177,9 @@ const AddExpenseModal = ({
 
               <input
                 className="amountInput"
-                type="text"
-                inputMode="decimal"
+                type="number"
+                step="0.01"
+                min="0"
                 placeholder="0.00"
                 value={amount}
                 onChange={(e) => {
@@ -209,6 +210,12 @@ const AddExpenseModal = ({
                       key={category.name}
                       type="button"
                       className={`categoryCard ${isSelected ? "selected" : ""}`}
+                      style={
+                          {
+                            "--hover-border": category.color,
+                            "--hover-bg": category.background,
+                          } as React.CSSProperties
+                      }
                       onClick={() => setSelectedCategory(category.name)}
                     >
                       <div
