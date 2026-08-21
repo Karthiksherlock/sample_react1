@@ -1,7 +1,9 @@
+import { useState } from "react";
 import "./RecentTransactions.css";
 import type { Transaction } from "../types/transaction";
 import {
   Plus,
+  Search,
   UtensilsCrossed,
   Car,
   Receipt,
@@ -25,7 +27,7 @@ const CATEGORY_STYLES: Record<string, { color: string; background: string }> = {
   Entertainment: { color: "rgb(14, 165, 233)", background: "#e8f4fe" },
   Health:        { color: "rgb(244, 63, 94)", background: "#ffeef1" },
   Shopping:      { color: "rgb(236, 72, 153)", background: "#fdeef6" },
-  Other:         { color: "rgb(148, 163, 184)", background: "#f1f5f9" },
+  Other:         { color: "rgb(148, 163, 184)", background: "#f1f5f9" }, 
 };
 
 const CATEGORY_ICONS = {
@@ -49,6 +51,21 @@ const RecentTransactions = ({
   onAddExpense,
   transactions,
 }: RecentTransactionsProps) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredTransactions = transactions.filter((transaction) => {
+  const searchValue = searchTerm.toLowerCase().trim();
+
+  if (!searchValue) {
+    return true;
+  }
+
+  return (
+    transaction.merchant.toLowerCase().includes(searchValue) ||
+    transaction.category.toLowerCase().includes(searchValue) ||
+    transaction.note.toLowerCase().includes(searchValue)
+  );
+});
+
   return (
     <section className="recentTransactionsCard">
       <div className="transactionsHeader">
@@ -61,7 +78,18 @@ const RecentTransactions = ({
           <Plus size={16} /> Add Expense
         </button>
       </div>
+      <div className="transactionsControls">
+        <div className="searchWrapper">
+          <Search size={16} />
 
+          <input
+            type="text"
+            placeholder="Search merchant, category, note..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
+      </div>
       <div className="transactionsTablePlaceholder">
         {transactions.length === 0 ? (
           <p className="emptyState">No transactions yet.</p>
