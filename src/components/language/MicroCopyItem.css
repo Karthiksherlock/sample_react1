@@ -1,0 +1,169 @@
+.microCopyCard {
+  display: grid;
+
+  grid-template-columns: minmax(180px, 260px) 1fr auto;
+
+  width: 100%;
+  box-sizing: border-box;
+  column-gap: 12px;
+
+  padding: 16px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+
+  background: white;
+}
+
+.microCopyContent {
+  display: contents;
+}
+
+.microCopyKeySection,
+.microCopyValueSection {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+}
+
+.microCopyKeySection {
+  min-height: 108px;
+  width: 260px;
+  height: auto;
+}
+
+.microCopyValueSection {
+  min-height: 108px;
+  width: auto;
+}
+.microCopyKeySection label,
+.microCopyValueSection label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  line-height: 16px;
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+
+.microCopyKeyBox {
+  margin-top: 4px;
+
+  width: 100%;
+
+  height: 36px;
+
+  box-sizing: border-box;
+
+  padding: 8px 12px;
+
+  border-radius: 6px;
+
+  background: rgb(255, 244, 235);
+
+  color: rgb(249, 108, 26);
+
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace !important;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.microCopyTextarea {
+  width: 100%;
+
+  height: 80px;
+  min-height: 80px;
+
+  margin-top: 4px;
+
+  box-sizing: border-box;
+
+  padding: 8px 12px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+
+  background: white;
+
+  color: #020817;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+
+  resize: vertical;
+}
+
+.microCopyTextarea:focus {
+  border-color: #e2e8f0;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #f96c1a;
+  outline: none;
+}
+
+.deleteButton {
+  width: 40px;
+  height: 40px;
+
+  margin: 20px 0 0 0;
+  border-color: rgb(226, 232, 240);
+  justify-self: auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: rgb(57, 68, 83);
+
+  cursor: pointer;
+}
+.deleteButton svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.deleteButton:hover {
+  background-color: hsl(28 100% 96%);
+  color: hsl(0 84.2% 60.2%);
+  justify-content: center;
+}
+@media (max-width: 675px) {
+  .microCopyCard {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+
+  .microCopyContent {
+    display: block;
+  }
+
+  .microCopyKeySection {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .microCopyValueSection {
+    margin-top: 12px;
+    width: 100%;
+    min-height: auto;
+  }
+  .microCopyTextarea {
+    width: 100%;
+  }
+
+  .deleteButton {
+    margin-top: 0;
+    justify-self: flex-start;
+    align-self: flex-start;
+  }
+}

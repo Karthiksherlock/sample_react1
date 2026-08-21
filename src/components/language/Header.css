@@ -1,0 +1,150 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 1rem;
+}                
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  
+}
+
+.logoBox {
+  width: 46px;
+  height: 48px;
+  border-radius: 12px;
+
+  background: #f96c1a;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  flex-shrink: 0.75;
+}
+
+.logoBox svg {
+  width: 22px;
+  height: 22px;
+}
+
+.headerLeft h2 {
+  margin: 0;
+
+  color: #020817;
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+
+  letter-spacing: -0.6px;
+
+  text-align: left;
+}
+
+.headerLeft p {
+  margin: 0;
+  
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  
+  word-spacing: -5px;
+  letter-spacing: normal;
+
+  text-align: left;
+
+}
+.headerText{
+  flex: 1;
+  min-width:0;
+}
+.headeractions {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-shrink: 1;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.headeractions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink:0;
+  white-space:nowrap;
+
+  height: 40px;
+
+  padding: 8px 16px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s,
+    background-color 0.15s,
+    border-color 0.15s;
+
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.headeractions button:first-child {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+.headeractions button:first-child:hover {
+  background-color: hsl(28 100% 96%);
+  color: hsl(22 95% 40%);
+}
+
+.headeractions button:nth-child(2),
+.headeractions button:last-child {
+  background: #f96c1a;
+  color: white;
+  border: none;
+}
+.headeractions button:nth-child(2):hover,
+.headeractions button:last-child:hover {
+  opacity: 0.92;
+}
+
+.headeractions button svg {
+  width: 16px;
+  height: 16px;
+}
+@media (max-width: 675px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  .headeractions{
+    width:100%;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+  }
+  .headerLeft p {
+    flex-wrap: nowrap;
+  }
+}
